@@ -1,1 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCM Блог - Дмитрий Панибратский | Экспертные материалы по управлению цепями поставок</title>
+    <meta name="description" content="Профессиональный блог об управлении цепями поставок, цифровой трансформации SCM, AI-аналитике и оптимизации логистических процессов">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="SCM Блог - Дмитрий Панибратский">
+    <meta property="og:description" content="Экспертные материалы по цифровой трансформации цепей поставок">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://965910-bit.github.io/Panibratsky-Dmitry-Sergeevich/blog/">
+    
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .blog-header {
+            background: linear-gradient(135deg, #1E3A8A 0%, #3730A3 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .blog-card {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .blog-card-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3em;
+        }
+        
+        .blog-card-content {
+            padding: 25px;
+        }
+        
+        .blog-card h3 {
+            margin: 0 0 15px 0;
+            color: #1A202C;
+            font-size: 1.3em;
+            line-height: 1.4;
+        }
+        
+        .blog-card p {
+            color: #718096;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .blog-card-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #E2E8F0;
+        }
+        
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #718096;
+            font-size: 0.9em;
+        }
+        
+        .read-more {
+            display: inline-block;
+            background: #1E3A8A;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+        
+        .read-more:hover {
+            background: #3730A3;
+            color: white;
+        }
+        
+        .back-to-main {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1E3A8A;
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+        
+        .back-to-main:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navigation">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="../index.html">← На главную</a></li>
+                <li><a href="#architecture">Архитектура</a></li>
+                <li><a href="#ai-agents">AI-агенты</a></li>
+                <li><a href="#processes">Процессы</a></li>
+                <li><a href="#tools">Инструменты</a></li>
+            </ul>
+        </div>
+    </nav>
 
+    <header class="blog-header">
+        <div class="container">
+            <h1>SCM Блог</h1>
+            <p class="header-subtitle">Экспертные материалы по цифровой трансформации цепей поставок</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <a href="../index.html" class="back-to-main">
+            <i class="fas fa-arrow-left"></i>
+            Вернуться на главную
+        </a>
+
+        <div class="blog-grid">
+            <!-- Архитектура SCM -->
+            <div class="blog-card" id="architecture">
+                <div class="blog-card-image">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <div class="blog-card-content">
+                    <h3>Архитектура интеллектуальной SCM платформы</h3>
+                    <p>4-уровневая архитектура для построения цифровых цепей поставок следующего поколения. От MDM и IAM до AI-ядра и API Gateway.</p>
+                    
+                    <div class="blog-card-stats">
+                        <div class="stat">
+                            <i class="fas fa-layer-group"></i>
+                            <span>4 уровня</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-cube"></i>
+                            <span>12 модулей</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-brain"></i>
+                            <span>AI-ядро</span>
+                        </div>
+                    </div>
+                    
+                    <a href="scm-platform/index.html" class="read-more">Изучить архитектуру →</a>
+                </div>
+            </div>
+
+            <!-- AI-агенты -->
+            <div class="blog-card" id="ai-agents">
+                <div class="blog-card-image">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="blog-card-content">
+                    <h3>25 AI-агентов для автоматизации SCM</h3>
+                    <p>Цифровые помощники для каждого этапа цепи поставок: от прогнозирования спроса до управления возвратами и претензиями.</p>
+                    
+                    <div class="blog-card-stats">
+                        <div class="stat">
+                            <i class="fas fa-robot"></i>
+                            <span>25 агентов</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-bolt"></i>
+                            <span>Автоматизация</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-chart-line"></i>
+                            <span>AI/ML</span>
+                        </div>
+                    </div>
+                    
+                    <a href="ai-agents/index.html" class="read-more">Смотреть агентов →</a>
+                </div>
+            </div>
+
+            <!-- Процессы -->
+            <div class="blog-card" id="processes">
+                <div class="blog-card-image">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <div class="blog-card-content">
+                    <h3>Order-to-Delivery за 24 часа</h3>
+                    <p>Оптимизированные бизнес-процессы с AI-интеграцией. Снижение циклов и повышение точности на каждом этапе.</p>
+                    
+                    <div class="blog-card-stats">
+                        <div class="stat">
+                            <i class="fas fa-clock"></i>
+                            <span>24 часа</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-percentage"></i>
+                            <span>98% точность</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>KPI дашборды</span>
+                        </div>
+                    </div>
+                    
+                    <a href="processes/index.html" class="read-more">Изучить процессы →</a>
+                </div>
+            </div>
+
+            <!-- Инструменты -->
+            <div class="blog-card" id="tools">
+                <div class="blog-card-image">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="blog-card-content">
+                    <h3>Инструменты и решения для SCM</h3>
+                    <p>Готовые калькуляторы, шаблоны и методики для внедрения лучших практик управления цепями поставок.</p>
+                    
+                    <div class="blog-card-stats">
+                        <div class="stat">
+                            <i class="fas fa-calculator"></i>
+                            <span>Калькуляторы</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Шаблоны</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Метрики</span>
+                        </div>
+                    </div>
+                    
+                    <a href="tools/index.html" class="read-more">Смотреть инструменты →</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Дмитрий Панибратский. SCM Блог.</p>
+            <p>Профессиональные материалы по управлению цепями поставок.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
