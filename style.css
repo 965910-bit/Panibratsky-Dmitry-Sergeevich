@@ -19,43 +19,88 @@ body {
     padding: 0 20px;
 }
 
-/* Header - более сдержанный */
+/* Header с фото - уменьшенный размер */
 .header {
     background: linear-gradient(135deg, #1E3A8A 0%, #3730A3 100%);
     color: white;
     padding: 60px 0;
-    text-align: center;
-    border-bottom: 1px solid #E2E8F0;
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 35%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(30, 58, 138, 0.9) 100%);
+    z-index: 1;
+}
+
+.header-content {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.header-text {
+    max-width: 600px;
 }
 
 .header-content h1 {
-    font-size: 2.5em;
+    font-size: 2.2em;
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     letter-spacing: -0.02em;
+    line-height: 1.2;
 }
 
-.subtitle {
-    font-size: 1.2em;
+.header-subtitle {
+    font-size: 1.1em;
     font-weight: 400;
     margin-bottom: 20px;
-    opacity: 0.9;
+    opacity: 0.95;
     line-height: 1.5;
+}
+
+.header-photo {
+    text-align: center;
+}
+
+.photo-container {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    margin: 0 auto;
+    background: #f8f9fa;
+}
+
+.photo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .contact-badges {
     display: flex;
-    justify-content: center;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
     margin-top: 20px;
 }
 
 .badge {
     background: rgba(255, 255, 255, 0.15);
-    padding: 6px 14px;
+    padding: 6px 12px;
     border-radius: 16px;
-    font-size: 0.85em;
+    font-size: 0.8em;
     font-weight: 500;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -724,12 +769,37 @@ a:focus, button:focus {
 
 /* Mobile optimizations */
 @media (max-width: 768px) {
-    .header-content h1 {
-        font-size: 2em;
+    .header {
+        padding: 40px 0;
     }
     
-    .subtitle {
-        font-size: 1.1em;
+    .header-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .header-content h1 {
+        font-size: 1.8em;
+    }
+    
+    .header-subtitle {
+        font-size: 1em;
+    }
+    
+    .photo-container {
+        width: 150px;
+        height: 150px;
+        order: -1;
+    }
+    
+    .contact-badges {
+        justify-content: center;
+    }
+    
+    .badge {
+        font-size: 0.75em;
+        padding: 5px 10px;
     }
     
     .nav-links {
