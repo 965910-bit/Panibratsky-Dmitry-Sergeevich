@@ -1,1 +1,484 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Архитектура SCM платформы - Дмитрий Панибратский | 4-уровневая интеллектуальная платформа</title>
+    <meta name="description" content="4-уровневая архитектура интеллектуальной SCM платформы: от MDM и IAM до AI-ядра и API Gateway. Цифровая трансформация цепей поставок.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Архитектура SCM платформы - 4 уровня цифровой трансформации">
+    <meta property="og:description" content="Интеллектуальная SCM платформа с AI-ядром для управления цепями поставок следующего поколения">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://965910-bit.github.io/Panibratsky-Dmitry-Sergeevich/blog/scm-platform/">
+    
+    <link rel="stylesheet" href="../../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .article-header {
+            background: linear-gradient(135deg, #1E3A8A 0%, #3730A3 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+        
+        .article-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 30px;
+        }
+        
+        .breadcrumb a {
+            color: #1E3A8A;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .architecture-levels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .level-card {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .level-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+        }
+        
+        .level-0::before { background: #DC2626; }
+        .level-1::before { background: #EA580C; }
+        .level-2::before { background: #CA8A04; }
+        .level-3::before { background: #16A34A; }
+        
+        .level-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .level-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .level-icon {
+            width: 50px;
+            height: 50px;
+            background: #F1F5F9;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+        }
+        
+        .level-0 .level-icon { color: #DC2626; }
+        .level-1 .level-icon { color: #EA580C; }
+        .level-2 .level-icon { color: #CA8A04; }
+        .level-3 .level-icon { color: #16A34A; }
+        
+        .level-title h3 {
+            margin: 0;
+            color: #1A202C;
+            font-size: 1.3em;
+        }
+        
+        .level-subtitle {
+            color: #718096;
+            font-size: 0.9em;
+            margin: 0;
+        }
+        
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .module-card {
+            background: #F8FAFC;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #1E3A8A;
+        }
+        
+        .module-card h4 {
+            margin: 0 0 8px 0;
+            color: #2D3748;
+            font-size: 1em;
+        }
+        
+        .module-card p {
+            margin: 0;
+            color: #718096;
+            font-size: 0.85em;
+            line-height: 1.4;
+        }
+        
+        .roi-calculator {
+            background: #F0F9FF;
+            border: 1px solid #BAE6FD;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        .calculator-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            color: #1A202C;
+        }
+        
+        .form-group input {
+            padding: 10px;
+            border: 1px solid #CBD5E0;
+            border-radius: 6px;
+            font-size: 1em;
+        }
+        
+        .calculator-result {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #16A34A;
+        }
+        
+        .nav-articles {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #E2E8F0;
+        }
+        
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: #1E3A8A;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background: #3730A3;
+            color: white;
+        }
+        
+        .nav-button.prev {
+            background: #F8FAFC;
+            color: #4A5568;
+            border: 1px solid #E2E8F0;
+        }
+        
+        .nav-button.prev:hover {
+            background: #E2E8F0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navigation">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="../../index.html">На главную</a></li>
+                <li><a href="../index.html">Все статьи</a></li>
+                <li><a href="#architecture">Архитектура</a></li>
+                <li><a href="#calculator">Калькулятор ROI</a></li>
+            </ul>
+        </div>
+    </nav>
 
+    <article class="article-content">
+        <div class="breadcrumb">
+            <a href="../../index.html">Главная</a> → 
+            <a href="../index.html">Блог</a> → 
+            <span>Архитектура SCM</span>
+        </div>
+
+        <header class="article-header">
+            <div class="container">
+                <h1>Архитектура интеллектуальной SCM платформы</h1>
+                <p class="header-subtitle">4-уровневая система для цифровой трансформации цепей поставок</p>
+            </div>
+        </header>
+
+        <div class="container">
+            <section id="overview">
+                <h2>Обзор архитектуры</h2>
+                <p>Современная SCM платформа требует комплексного подхода к архитектуре. Представляю 4-уровневую модель, которая обеспечивает масштабируемость, безопасность и интеллектуальную обработку данных.</p>
+            </section>
+
+            <section id="architecture">
+                <h2>4 уровня интеллектуальной платформы</h2>
+                
+                <div class="architecture-levels">
+                    <!-- Уровень 0 -->
+                    <div class="level-card level-0">
+                        <div class="level-header">
+                            <div class="level-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="level-title">
+                                <h3>Уровень 0: Фундамент</h3>
+                                <p class="level-subtitle">Data & Infrastructure</p>
+                            </div>
+                        </div>
+                        <p>Базовые сервисы и управление данными. Основа для построения надежной платформы.</p>
+                        
+                        <div class="modules-grid">
+                            <div class="module-card">
+                                <h4>MDM (Master Data Management)</h4>
+                                <p>Единое управление мастер-данными</p>
+                            </div>
+                            <div class="module-card">
+                                <h4>IAM (Identity Access Management)</h4>
+                                <p>Управление доступом и безопасностью</p>
+                            </div>
+                            <div class="module-card">
+                                <h4>API Gateway</h4>
+                                <p>Единая точка входа для интеграций</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Уровень 1 -->
+                    <div class="level-card level-1">
+                        <div class="level-header">
+                            <div class="level-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="level-title">
+                                <h3>Уровень 1: Ядро</h3>
+                                <p class="level-subtitle">Core Services</p>
+                            </div>
+                        </div>
+                        <p>Базовые бизнес-сервисы и процессы. Автоматизация ключевых операций.</p>
+                        
+                        <div class="modules-grid">
+                            <div class="module-card">
+                                <h4>Inventory Management</h4>
+                                <p>Управление запасами в реальном времени</p>
+                            </div>
+                            <div class="module-card">
+                                <h4>Order Management</h4>
+                                <p>Обработка и исполнение заказов</p>
+                            </div>
+                            <div class="module-card">
+                                <h4>Supplier Management</h4>
+                                <p>Управление поставщиками и контрактами</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Уровень 2 -->
+                    <div class="level-card level-2">
+                        <div class="level-header">
+                            <div class="level-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="level-title">
+                                <h3>Уровень 2: Интеллект</h3>
+                                <p class="level-subtitle">AI & Analytics</p>
+                            </div>
+                        </div>
+                        <p>AI-сервисы и аналитическая платформа. Преобразование данных в инсайты.</p>
+                        
+                        <div class="modules-grid">
+                            <div class="module-card">
+                                <h4>Demand Forecasting</h4>
+                                <p>AI-прогнозирование спроса</p>
+                            </div>
+                            <div class="module-card">
+                                <h4>Predictive Analytics</h4>
+                                <p>Предиктивная аналитика рисков</p>
+                            </div>
+                            <div class="module-card">
+                                <h4>Optimization Engine</h4>
+                                <p>Оптимизация маршрутов и запасов</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Уровень 3 -->
+                    <div class="level-card level-3">
+                        <div class="level-header">
+                            <div class="level-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="level-title">
+                                <h3>Уровень 3: Инновации</h3>
+                                <p class="level-subtitle">Innovation & Experience</p>
+                            </div>
+                        </div>
+                        <p>Цифровые двойники и инновационные сервисы. Будущее управления цепями поставок.</p>
+                        
+                        <div class="modules-grid">
+                            <div class="module-card">
+                                <h4>Digital Twin</h4>
+                                <p>Цифровые двойники процессов</p>
+                            </div>
+                            <div class="module-card">
+                                <h4>IoT Integration</h4>
+                                <p>Интеграция с интернетом вещей</p>
+                            </div>
+                            <div class="module-card">
+                                <h4>Blockchain Tracking</h4>
+                                <p>Сквозная прослеживаемость</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="calculator" class="roi-calculator">
+                <h2>Калькулятор ROI SCM платформы</h2>
+                <p>Оцените потенциальную экономическую эффективность внедрения интеллектуальной SCM платформы.</p>
+                
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label for="monthly-orders">Ежемесячные заказы:</label>
+                        <input type="number" id="monthly-orders" value="1000" min="100">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="avg-order-value">Средняя стоимость заказа (руб):</label>
+                        <input type="number" id="avg-order-value" value="5000" min="1000">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="current-efficiency">Текущая эффективность (%):</label>
+                        <input type="number" id="current-efficiency" value="75" min="50" max="95">
+                    </div>
+                </div>
+                
+                <button onclick="calculateROI()" class="nav-button" style="background: #16A34A;">
+                    <i class="fas fa-calculator"></i>
+                    Рассчитать ROI
+                </button>
+                
+                <div class="calculator-result" id="roi-result" style="display: none;">
+                    <h4>Результаты расчета:</h4>
+                    <p id="result-text"></p>
+                </div>
+            </section>
+
+            <section id="benefits">
+                <h2>Ключевые преимущества</h2>
+                <div class="expertise-items-grid">
+                    <div class="expertise-item-card">
+                        <div class="item-card-header">
+                            <h4><i class="fas fa-chart-line"></i> Снижение затрат на 15-25%</h4>
+                        </div>
+                        <p>Оптимизация логистических и операционных расходов через автоматизацию и AI-аналитику.</p>
+                    </div>
+                    
+                    <div class="expertise-item-card">
+                        <div class="item-card-header">
+                            <h4><i class="fas fa-bolt"></i> Ускорение процессов на 40%</h4>
+                        </div>
+                        <p>Сокращение циклов обработки заказов и управления запасами.</p>
+                    </div>
+                    
+                    <div class="expertise-item-card">
+                        <div class="item-card-header">
+                            <h4><i class="fas fa-shield-alt"></i> Повышение точности до 98%</h4>
+                        </div>
+                        <p>Снижение ошибок в прогнозировании и планировании.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="nav-articles">
+                <a href="../index.html" class="nav-button prev">
+                    <i class="fas fa-arrow-left"></i>
+                    Назад к статьям
+                </a>
+                <a href="../ai-agents/index.html" class="nav-button">
+                    AI-агенты
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Дмитрий Панибратский. Архитектура SCM платформы.</p>
+        </div>
+    </footer>
+
+    <script>
+        function calculateROI() {
+            const monthlyOrders = parseInt(document.getElementById('monthly-orders').value);
+            const avgOrderValue = parseInt(document.getElementById('avg-order-value').value);
+            const currentEfficiency = parseInt(document.getElementById('current-efficiency').value);
+            
+            const monthlyRevenue = monthlyOrders * avgOrderValue;
+            const efficiencyGain = (95 - currentEfficiency) / 100; // Target 95% efficiency
+            const monthlySavings = monthlyRevenue * efficiencyGain * 0.15; // 15% of gained efficiency
+            
+            const annualSavings = monthlySavings * 12;
+            const implementationCost = monthlyRevenue * 0.1; // 10% of monthly revenue
+            const roiMonths = implementationCost / monthlySavings;
+            
+            const resultText = `
+                <strong>Годовая экономия:</strong> ${Math.round(annualSavings).toLocaleString()} руб<br>
+                <strong>Срок окупаемости:</strong> ${roiMonths.toFixed(1)} месяцев<br>
+                <strong>ROI за первый год:</strong> ${((annualSavings - implementationCost) / implementationCost * 100).toFixed(1)}%
+            `;
+            
+            document.getElementById('result-text').innerHTML = resultText;
+            document.getElementById('roi-result').style.display = 'block';
+        }
+        
+        // Initial calculation on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateROI();
+        });
+    </script>
+
+    <script src="../../script.js"></script>
+</body>
+</html>
