@@ -1,1 +1,8 @@
+User-agent: *
+Allow: /
 
+Sitemap: https://965910-bit.github.io/Panibratsky-Dmitry-Sergeevich/sitemap.xml
+
+# Directives
+Disallow: /private/
+Disallow: /tmp/
