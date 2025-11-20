@@ -1,1 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Закупки и тендеры - Центр управления</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calculators.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1><a href="../index.html" style="color: inherit; text-decoration: none;">📊 Центр управления</a></h1>
+                <span>Закупки и тендеры</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Главная визитка</a></li>
+                <li><a href="index.html">Все инструменты</a></li>
+                <li><a href="../index.html#about">О проекте</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <main class="container" style="margin-top: 120px; padding: 2rem 0;">
+        <div class="section-header">
+            <h1>Инструменты закупок и тендеров</h1>
+            <p>Расчет показателей эффективности закупочной деятельности</p>
+        </div>
+
+        <div class="calculators-grid">
+            <div class="calculator-card">
+                <h3><i class="fas fa-hand-holding-usd"></i> Экономия от закупок</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="initial-price">Исходная цена (руб.):</label>
+                        <input type="number" id="initial-price" placeholder="Например: 100000">
+                    </div>
+                    <div class="input-group">
+                        <label for="final-price">Финальная цена (руб.):</label>
+                        <input type="number" id="final-price" placeholder="Например: 80000">
+                    </div>
+                    <button onclick="calculateProcurementSavings()" class="calc-button">Рассчитать экономию</button>
+                    <div class="result" id="procurement-savings-result"></div>
+                </div>
+            </div>
+
+            <div class="calculator-card">
+                <h3><i class="fas fa-calculator"></i> Стоимость владения (TCO)</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="acquisition-cost">Стоимость приобретения (руб.):</label>
+                        <input type="number" id="acquisition-cost" placeholder="Например: 50000">
+                    </div>
+                    <div class="input-group">
+                        <label for="operating-cost">Эксплуатационные расходы (руб.):</label>
+                        <input type="number" id="operating-cost" placeholder="Например: 10000">
+                    </div>
+                    <div class="input-group">
+                        <label for="maintenance-cost">Затраты на обслуживание (руб.):</label>
+                        <input type="number" id="maintenance-cost" placeholder="Например: 5000">
+                    </div>
+                    <button onclick="calculateTCO()" class="calc-button">Рассчитать TCO</button>
+                    <div class="result" id="tco-result"></div>
+                </div>
+            </div>
+
+            <div class="calculator-card">
+                <h3><i class="fas fa-gavel"></i> Эффективность тендеров</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="successful-tenders">Успешные тендеры:</label>
+                        <input type="number" id="successful-tenders" placeholder="Например: 8">
+                    </div>
+                    <div class="input-group">
+                        <label for="total-tenders">Общее количество тендеров:</label>
+                        <input type="number" id="total-tenders" placeholder="Например: 10">
+                    </div>
+                    <button onclick="calculateTenderEffectiveness()" class="calc-button">Рассчитать эффективность</button>
+                    <div class="result" id="tender-effectiveness-result"></div>
+                </div>
+            </div>
+
+            <div class="calculator-card">
+                <h3><i class="fas fa-shipping-fast"></i> Время выполнения заказа</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="order-date">Дата заказа:</label>
+                        <input type="date" id="order-date">
+                    </div>
+                    <div class="input-group">
+                        <label for="delivery-date">Дата поставки:</label>
+                        <input type="date" id="delivery-date">
+                    </div>
+                    <button onclick="calculateOrderLeadTime()" class="calc-button">Рассчитать время выполнения</button>
+                    <div class="result" id="lead-time-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="templates-section">
+            <h2>📥 Скачать шаблоны для закупок</h2>
+            <div class="templates-grid">
+                <a href="templates/supplier-evaluation.xlsx" class="template-card" download>
+                    <i class="fas fa-star"></i>
+                    <h4>Оценка поставщиков</h4>
+                    <p>Шаблон для оценки и выбора поставщиков</p>
+                    <span class="file-size">~1.1 MB</span>
+                </a>
+                <a href="templates/tender-documentation.docx" class="template-card" download>
+                    <i class="fas fa-file-contract"></i>
+                    <h4>Тендерная документация</h4>
+                    <p>Шаблоны документов для проведения тендеров</p>
+                    <span class="file-size">~1.3 MB</span>
+                </a>
+                <a href="templates/procurement-plan.xlsx" class="template-card" download>
+                    <i class="fas fa-clipboard-list"></i>
+                    <h4>План закупок</h4>
+                    <p>Шаблон для планирования закупочной деятельности</p>
+                    <span class="file-size">~1.0 MB</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Центр управления</h3>
+                    <p>Комплексные инструменты для эффективного управления</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Инструменты закупок</h4>
+                    <ul>
+                        <li><a href="#">Тендеры</a></li>
+                        <li><a href="#">Поставщики</a></li>
+                        <li><a href="#">TCO анализ</a></li>
+                        <li><a href="#">Договора</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Центр управления. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/procurement-calculators.js"></script>
+</body>
+</html>
