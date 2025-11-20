@@ -82,6 +82,135 @@
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Projects Section Styles */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            background: var(--card-bg, #ffffff);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color, #e1e5e9);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 300px;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .project-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-light, #666);
+        }
+
+        .project-features h4 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color, #2c5aa0);
+        }
+
+        .project-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .project-features li {
+            padding: 0.3rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-status {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            color: white;
+        }
+
+        .status-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .status-date {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary-color, #2c5aa0);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            width: fit-content;
+        }
+
+        .project-link:hover {
+            background: var(--primary-dark, #1e3d72);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .project-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .project-image {
+                height: 250px;
+            }
+            
+            .project-status {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body itemprop="mainEntity" itemscope itemtype="https://schema.org/Person">
     <!-- Skip link для доступности -->
@@ -316,19 +445,64 @@
             </div>
         </section>
 
-        <!-- Projects -->
+        <!-- Projects Section -->
         <section id="projects" class="section">
             <h2>Профессиональные проекты</h2>
             
-            <div class="project-card">
-                <h3>Книга "Полная теория SCM"</h3>
-                <p>Практическое руководство по цифровой трансформации SCM - от базовых стандартов до создания цифровых двойников процессов цепей поставок.</p>
-            </div>
+            <div class="projects-grid">
+                <!-- Книга SCM -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/scm-book-screenshot.png" alt="Обложка книги 'Полная теория SCM' - Дмитрий Панибратский" loading="lazy">
+                    </div>
+                    <div class="project-content">
+                        <h3>Книга "Полная теория SCM"</h3>
+                        <p class="project-description">Практическое руководство по цифровой трансформации SCM - от базовых стандартов до создания цифровых двойников процессов цепей поставок.</p>
+                        
+                        <div class="project-features">
+                            <h4>Основные разделы книги:</h4>
+                            <ul>
+                                <li>📖 Фундаментальные принципы управления цепями поставок</li>
+                                <li>🤖 AI и машинное обучение в логистике</li>
+                                <li>🔄 Цифровые двойники SCM-процессов</li>
+                                <li>📊 Предиктивная аналитика и прогнозирование</li>
+                                <li>🚀 Кейсы цифровой трансформации из практики</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="project-status">
+                            <span class="status-badge">📚 В процессе написания</span>
+                            <span class="status-date">Планируемая публикация: 2024 год</span>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="project-card">
-                <h3>Telegram-канал: Logistica & Supply Chain</h3>
-                <p>Профессиональный канал о цепях поставок и логистике. Делюсь практическими кейсами, исследованиями и актуальными трендами индустрии.</p>
-                <a href="https://t.me/LogisticaandSupplyChain" target="_blank" rel="noopener noreferrer nofollow">Подписаться на канал</a>
+                <!-- Telegram канал -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/telegram-channel.png" alt="Telegram канал Logistica & Supply Chain" loading="lazy">
+                    </div>
+                    <div class="project-content">
+                        <h3>Telegram-канал: Logistica & Supply Chain</h3>
+                        <p class="project-description">Профессиональный канал о цепях поставок и логистике. Делюсь практическими кейсами, исследованиями и актуальными трендами индустрии.</p>
+                        
+                        <div class="project-features">
+                            <h4>Темы канала:</h4>
+                            <ul>
+                                <li>🔍 Анализ кейсов из ритейла и FMCG</li>
+                                <li>📊 Обзоры AI-решений для логистики</li>
+                                <li>💡 Практические инструменты оптимизации</li>
+                                <li>🌍 Тренды глобальных цепей поставок</li>
+                                <li>🎯 Экспертные интервью с лидерами индустрии</li>
+                            </ul>
+                        </div>
+                        
+                        <a href="https://t.me/LogisticaandSupplyChain" target="_blank" rel="noopener noreferrer nofollow" class="project-link">
+                            <i class="fab fa-telegram"></i>
+                            Подписаться на канал
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
