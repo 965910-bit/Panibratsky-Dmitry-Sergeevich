@@ -1,1 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контроль и аудит - Центр управления</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calculators.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1><a href="../index.html" style="color: inherit; text-decoration: none;">📊 Центр управления</a></h1>
+                <span>Контроль и аудит</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Главная визитка</a></li>
+                <li><a href="index.html">Все инструменты</a></li>
+                <li><a href="../index.html#about">О проекте</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <main class="container" style="margin-top: 120px; padding: 2rem 0;">
+        <div class="section-header">
+            <h1>Инструменты контроля и аудита</h1>
+            <p>Расчет показателей безопасности, аудита и управления рисками</p>
+        </div>
+
+        <div class="calculators-grid">
+            <div class="calculator-card">
+                <h3><i class="fas fa-exclamation-triangle"></i> Уровень инцидентов безопасности</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="security-incidents">Количество инцидентов безопасности:</label>
+                        <input type="number" id="security-incidents" placeholder="Например: 5">
+                    </div>
+                    <div class="input-group">
+                        <label for="total-employees">Общая численность сотрудников:</label>
+                        <input type="number" id="total-employees" placeholder="Например: 200">
+                    </div>
+                    <button onclick="calculateSecurityIncidents()" class="calc-button">Рассчитать уровень инцидентов</button>
+                    <div class="result" id="security-incidents-result"></div>
+                </div>
+            </div>
+
+            <div class="calculator-card">
+                <h3><i class="fas fa-clipboard-check"></i> Эффективность аудита</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="issues-found">Количество найденных нарушений:</label>
+                        <input type="number" id="issues-found" placeholder="Например: 12">
+                    </div>
+                    <div class="input-group">
+                        <label for="total-audited">Количество проверенных процессов:</label>
+                        <input type="number" id="total-audited" placeholder="Например: 50">
+                    </div>
+                    <button onclick="calculateAuditEffectiveness()" class="calc-button">Рассчитать эффективность</button>
+                    <div class="result" id="audit-effectiveness-result"></div>
+                </div>
+            </div>
+
+            <div class="calculator-card">
+                <h3><i class="fas fa-umbrella"></i> Покрытие рисков</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="managed-risks">Количество управляемых рисков:</label>
+                        <input type="number" id="managed-risks" placeholder="Например: 45">
+                    </div>
+                    <div class="input-group">
+                        <label for="total-risks">Общее количество рисков:</label>
+                        <input type="number" id="total-risks" placeholder="Например: 60">
+                    </div>
+                    <button onclick="calculateRiskCoverage()" class="calc-button">Рассчитать покрытие</button>
+                    <div class="result" id="risk-coverage-result"></div>
+                </div>
+            </div>
+
+            <div class="calculator-card">
+                <h3><i class="fas fa-clock"></i> Среднее время реагирования</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="total-response-time">Общее время реагирования (часы):</label>
+                        <input type="number" id="total-response-time" placeholder="Например: 120">
+                    </div>
+                    <div class="input-group">
+                        <label for="incidents-count">Количество инцидентов:</label>
+                        <input type="number" id="incidents-count" placeholder="Например: 30">
+                    </div>
+                    <button onclick="calculateAverageResponseTime()" class="calc-button">Рассчитать время реагирования</button>
+                    <div class="result" id="response-time-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="templates-section">
+            <h2>📥 Скачать шаблоны для контроля и аудита</h2>
+            <div class="templates-grid">
+                <a href="templates/audit-checklist.xlsx" class="template-card" download>
+                    <i class="fas fa-list-check"></i>
+                    <h4>Чек-листы аудита</h4>
+                    <p>Набор чек-листов для проведения аудитов</p>
+                    <span class="file-size">~1.2 MB</span>
+                </a>
+                <a href="templates/risk-matrix.xlsx" class="template-card" download>
+                    <i class="fas fa-table"></i>
+                    <h4>Матрица рисков</h4>
+                    <p>Шаблон для оценки и управления рисками</p>
+                    <span class="file-size">~1.5 MB</span>
+                </a>
+                <a href="templates/security-policy.docx" class="template-card" download>
+                    <i class="fas fa-file-contract"></i>
+                    <h4>Политика безопасности</h4>
+                    <p>Шаблон политики информационной безопасности</p>
+                    <span class="file-size">~0.9 MB</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Центр управления</h3>
+                    <p>Комплексные инструменты для эффективного управления</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Инструменты контроля</h4>
+                    <ul>
+                        <li><a href="#">Аудит</a></li>
+                        <li><a href="#">Безопасность</a></li>
+                        <li><a href="#">Управление рисками</a></li>
+                        <li><a href="#">Комплаенс</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Центр управления. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/control-calculators.js"></script>
+</body>
+</html>
