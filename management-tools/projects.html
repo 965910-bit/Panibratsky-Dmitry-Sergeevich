@@ -1,1 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление проектами - Центр управления</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calculators.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1><a href="../index.html" style="color: inherit; text-decoration: none;">📊 Центр управления</a></h1>
+                <span>Управление проектами</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Главная визитка</a></li>
+                <li><a href="index.html">Все инструменты</a></li>
+                <li><a href="../index.html#about">О проекте</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <main class="container" style="margin-top: 120px; padding: 2rem 0;">
+        <div class="section-header">
+            <h1>Проектные калькуляторы</h1>
+            <p>Расчет эффективности и окупаемости проектов</p>
+        </div>
+
+        <div class="calculators-grid">
+            <div class="calculator-card">
+                <h3><i class="fas fa-calculator"></i> Чистая приведенная стоимость (NPV)</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="npv-investment">Начальные инвестиции (руб.):</label>
+                        <input type="number" id="npv-investment" placeholder="Например: 1000000">
+                    </div>
+                    <div class="input-group">
+                        <label for="npv-rate">Ставка дисконтирования (%):</label>
+                        <input type="number" id="npv-rate" placeholder="Например: 12" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label for="npv-cashflows">Денежные потоки (через запятую):</label>
+                        <input type="text" id="npv-cashflows" placeholder="300000, 400000, 500000">
+                    </div>
+                    <button onclick="calculateProjectNPV()" class="calc-button">Рассчитать NPV</button>
+                    <div class="result" id="npv-project-result"></div>
+                </div>
+            </div>
+
+            <div class="calculator-card">
+                <h3><i class="fas fa-chart-line"></i> Внутренняя норма доходности (IRR)</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="irr-investment">Начальные инвестиции (руб.):</label>
+                        <input type="number" id="irr-investment" placeholder="Например: 500000">
+                    </div>
+                    <div class="input-group">
+                        <label for="irr-cashflows">Денежные потоки (через запятую):</label>
+                        <input type="text" id="irr-cashflows" placeholder="150000, 200000, 250000">
+                    </div>
+                    <button onclick="calculateIRR()" class="calc-button">Рассчитать IRR</button>
+                    <div class="result" id="irr-result"></div>
+                </div>
+            </div>
+
+            <div class="calculator-card">
+                <h3><i class="fas fa-calendar-check"></i> Срок окупаемости проекта</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="pb-investment">Первоначальные инвестиции (руб.):</label>
+                        <input type="number" id="pb-investment" placeholder="Например: 800000">
+                    </div>
+                    <div class="input-group">
+                        <label for="pb-annual-cashflow">Годовой денежный поток (руб.):</label>
+                        <input type="number" id="pb-annual-cashflow" placeholder="Например: 200000">
+                    </div>
+                    <button onclick="calculateProjectPayback()" class="calc-button">Рассчитать срок окупаемости</button>
+                    <div class="result" id="project-payback-result"></div>
+                </div>
+            </div>
+
+            <div class="calculator-card">
+                <h3><i class="fas fa-percentage"></i> Индекс рентабельности (PI)</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="pi-investment">Начальные инвестиции (руб.):</label>
+                        <input type="number" id="pi-investment" placeholder="Например: 600000">
+                    </div>
+                    <div class="input-group">
+                        <label for="pi-rate">Ставка дисконтирования (%):</label>
+                        <input type="number" id="pi-rate" placeholder="Например: 10" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label for="pi-cashflows">Денежные потоки (через запятую):</label>
+                        <input type="text" id="pi-cashflows" placeholder="200000, 250000, 300000">
+                    </div>
+                    <button onclick="calculatePI()" class="calc-button">Рассчитать PI</button>
+                    <div class="result" id="pi-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="templates-section">
+            <h2>📥 Скачать шаблоны для проектов</h2>
+            <div class="templates-grid">
+                <a href="templates/project-charter.docx" class="template-card" download>
+                    <i class="fas fa-file-word"></i>
+                    <h4>Устав проекта</h4>
+                    <p>Шаблон для оформления устава проекта</p>
+                    <span class="file-size">~0.8 MB</span>
+                </a>
+                <a href="templates/project-plan.xlsx" class="template-card" download>
+                    <i class="fas fa-file-excel"></i>
+                    <h4>План проекта</h4>
+                    <p>Комплексный план-график проекта</p>
+                    <span class="file-size">~1.5 MB</span>
+                </a>
+                <a href="templates/risk-register.xlsx" class="template-card" download>
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h4>Реестр рисков</h4>
+                    <p>Шаблон для управления проектными рисками</p>
+                    <span class="file-size">~1.2 MB</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Центр управления</h3>
+                    <p>Комплексные инструменты для эффективного управления</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Проектные инструменты</h4>
+                    <ul>
+                        <li><a href="#">NPV/IRR</a></li>
+                        <li><a href="#">Срок окупаемости</a></li>
+                        <li><a href="#">Бюджетирование</a></li>
+                        <li><a href="#">Управление рисками</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Центр управления. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/projects-calculators.js"></script>
+</body>
+</html>
