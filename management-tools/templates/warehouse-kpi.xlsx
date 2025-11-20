@@ -1,1 +1,82 @@
+# create_warehouse_kpi.py
+import openpyxl
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment
 
+def create_warehouse_kpi():
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "KPI Склада"
+    
+    # Заголовок
+    ws.merge_cells('A1:H1')
+    ws['A1'] = "ПОКАЗАТЕЛИ ЭФФЕКТИВНОСТИ СКЛАДА"
+    ws['A1'].font = Font(size=14, bold=True)
+    ws['A1'].alignment = Alignment(horizontal='center')
+    
+    # Основные показатели
+    headers = ["Показатель", "Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Цель"]
+    ws.append(headers)
+    
+    kpi_data = [
+        ["Точность учета (%)", 95, 96, 97, 98, 98.5, 99, 99],
+        ["Оборачиваемость (дни)", 45, 42, 40, 38, 36, 35, 30],
+        ["Производительность (ед/час)", 50, 52, 55, 57, 60, 62, 65],
+        ["Уровень сервиса (%)", 92, 93, 94, 95, 96, 97, 98],
+        ["Процент ошибок (%)", 5, 4, 3, 2, 1.5, 1, 1],
+        ["Загрузка мощностей (%)", 75, 78, 80, 82, 85, 88, 90]
+    ]
+    
+    for row in kpi_data:
+        ws.append(row)
+    
+    # Формулы для средних значений и отклонений
+    ws['A9'] = "Среднее значение"
+    for col in range(2, 8):
+        ws.cell(row=9, column=col).value = f'=AVERAGE(B{3}:B{8})'
+    
+    ws['A10'] = "Отклонение от цели"
+    for col in range(2, 8):
+        ws.cell(row=10, column=col).value = f'=B{9}-H{col-1}'
+    
+    # Форматирование
+    for col in range(1, 9):
+        ws.cell(row=2, column=col).font = Font(bold=True)
+        ws.cell(row=2, column=col).fill = PatternFill(start_color="4F81BD", end_color="4F81BD", fill_type="solid")
+        ws.cell(row=2, column=col).font = Font(color="FFFFFF", bold=True)
+    
+    # Форматирование чисел
+    for row in range(3, 9):
+        for col in range(2, 9):
+            cell = ws.cell(row=row, column=col)
+            if row == 3 or row == 4:  # Точность учета и уровень сервиса
+                cell.number_format = '0.0%'
+            elif row == 5:  # Производительность
+                cell.number_format = '0'
+            elif row == 6:  # Ошибки
+                cell.number_format = '0.0%'
+            elif row == 7:  # Загрузка мощностей
+                cell.number_format = '0%'
+    
+    # Сводный лист
+    ws_summary = wb.create_sheet("Сводка")
+    ws_summary.append(["Показатель", "Текущее значение", "Цель", "Отклонение", "Статус"])
+    
+    summary_data = [
+        ["Общая эффективность склада", "=СРЗНАЧ('KPI Склада'!B9:G9)", "Целевой уровень"],
+        ["Достигнуто целей", "=СЧЁТЕСЛИ('KPI Склада'!B3:G8,\">=\"&'KPI Склада'!H3:H8)", "=СЧЁТ('KPI Склада'!B3:G8)"],
+        ["Эффективность (%)", "=B2/C2", "100%"]
+    ]
+    
+    for row in summary_data:
+        ws_summary.append(row)
+    
+    # Формулы для сводки
+    ws_summary['B3'] = "=COUNTIF('KPI Склада'!B3:G8,\">=\"&'KPI Склада'!H3:H8)/COUNT('KPI Склада'!B3:G8)"
+    ws_summary['C3'] = "1"
+    ws_summary['D3'] = "=B3-C3"
+    ws_summary['E3'] = "=IF(B3>=C3,\"✅ Достигнуто\",\"⚠️ Требует улучшений\")"
+    
+    wb.save("templates/warehouse-kpi.xlsx")
+
+create_warehouse_kpi()
