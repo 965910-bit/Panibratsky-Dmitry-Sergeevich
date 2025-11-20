@@ -1,1 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инструменты управления - Центр управления предприятием</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1><a href="../index.html" style="color: inherit; text-decoration: none;">📊 Центр управления</a></h1>
+                <span>Инструменты управления предприятием</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Главная визитка</a></li>
+                <li><a href="index.html">Все инструменты</a></li>
+                <li><a href="../index.html#about">О проекте</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Комплексная система управления предприятием</h1>
+                <p>Более 100 инструментов для анализа, оптимизации и контроля бизнес-процессов</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="number">50+</span>
+                        <span class="label">Калькуляторов</span>
+                    </div>
+                    <div class="stat">
+                        <span class="number">30+</span>
+                        <span class="label">Шаблонов</span>
+                    </div>
+                    <div class="stat">
+                        <span class="number">25+</span>
+                        <span class="label">Чек-листов</span>
+                    </div>
+                </div>
+                <button class="cta-button" onclick="scrollToSection('tools')">Начать работу</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="tools" class="tools-section">
+        <div class="container">
+            <h2>Инструменты управления</h2>
+            <p class="section-subtitle">Выберите нужный раздел для работы</p>
+            <div class="tools-grid">
+                <div class="tool-card" onclick="location.href='finance.html'">
+                    <div class="tool-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Финансовая аналитика</h3>
+                    <p>Рентабельность, маржинальность, ROI, NPV расчеты</p>
+                    <div class="tool-features">
+                        <span>15+ калькуляторов</span>
+                        <span>10 шаблонов</span>
+                    </div>
+                </div>
+
+                <div class="tool-card" onclick="location.href='logistics.html'">
+                    <div class="tool-icon"><i class="fas fa-truck"></i></div>
+                    <h3>Логистика и склад</h3>
+                    <p>KPI, чек-листы, оптимизация запасов, карты процессов</p>
+                    <div class="tool-features">
+                        <span>25+ инструментов</span>
+                        <span>15 чек-листов</span>
+                    </div>
+                </div>
+
+                <div class="tool-card" onclick="location.href='hr.html'">
+                    <div class="tool-icon"><i class="fas fa-users"></i></div>
+                    <h3>Управление персоналом</h3>
+                    <p>ФОТ, премии, KPI, оценка, развитие сотрудников</p>
+                    <div class="tool-features">
+                        <span>20+ калькуляторов</span>
+                        <span>HR шаблоны</span>
+                    </div>
+                </div>
+
+                <div class="tool-card" onclick="location.href='projects.html'">
+                    <div class="tool-icon"><i class="fas fa-project-diagram"></i></div>
+                    <h3>Управление проектами</h3>
+                    <p>NPV, IRR, срок окупаемости, ROI проектов</p>
+                    <div class="tool-features">
+                        <span>10+ калькуляторов</span>
+                        <span>Шаблоны проектов</span>
+                    </div>
+                </div>
+
+                <div class="tool-card" onclick="location.href='control.html'">
+                    <div class="tool-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Контроль и аудит</h3>
+                    <p>Чек-листы аудита, KPI безопасности, управление рисками</p>
+                    <div class="tool-features">
+                        <span>30+ чек-листов</span>
+                        <span>Карты рисков</span>
+                    </div>
+                </div>
+
+                <div class="tool-card" onclick="location.href='procurement.html'">
+                    <div class="tool-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <h3>Закупки и тендеры</h3>
+                    <p>Анализ поставщиков, калькуляторы тендеров, TCO</p>
+                    <div class="tool-features">
+                        <span>15+ инструментов</span>
+                        <span>Шаблоны договоров</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Центр управления</h3>
+                    <p>Комплексные инструменты для эффективного управления предприятием</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Разделы</h4>
+                    <ul>
+                        <li><a href="finance.html">Финансы</a></li>
+                        <li><a href="logistics.html">Логистика</a></li>
+                        <li><a href="hr.html">Персонал</a></li>
+                        <li><a href="projects.html">Проекты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Ресурсы</h4>
+                    <ul>
+                        <li><a href="#templates">Шаблоны</a></li>
+                        <li><a href="#calculators">Калькуляторы</a></li>
+                        <li><a href="#checklists">Чек-листы</a></li>
+                        <li><a href="#methodologies">Методики</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Центр управления. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
