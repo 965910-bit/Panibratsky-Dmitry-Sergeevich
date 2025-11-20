@@ -1,1 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление персоналом - Центр управления</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calculators.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1><a href="../index.html" style="color: inherit; text-decoration: none;">📊 Центр управления</a></h1>
+                <span>Управление персоналом</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Главная визитка</a></li>
+                <li><a href="index.html">Все инструменты</a></li>
+                <li><a href="../index.html#about">О проекте</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <main class="container" style="margin-top: 120px; padding: 2rem 0;">
+        <div class="section-header">
+            <h1>HR-калькуляторы</h1>
+            <p>Расчет показателей эффективности управления персоналом</p>
+        </div>
+
+        <div class="calculators-grid">
+            <div class="calculator-card">
+                <h3><i class="fas fa-people-arrows"></i> Текучесть кадров</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="employees-left">Количество уволившихся сотрудников:</label>
+                        <input type="number" id="employees-left" placeholder="Например: 15">
+                    </div>
+                    <div class="input-group">
+                        <label for="avg-employees">Среднесписочная численность:</label>
+                        <input type="number" id="avg-employees" placeholder="Например: 150">
+                    </div>
+                    <button onclick="calculateTurnover()" class="calc-button">Рассчитать текучесть</button>
+                    <div class="result" id="turnover-result"></div>
+                </div>
+            </div>
+
+            <div class="calculator-card">
+                <h3><i class="fas fa-user-plus"></i> Стоимость найма</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="recruitment-costs">Затраты на рекрутинг (руб.):</label>
+                        <input type="number" id="recruitment-costs" placeholder="Например: 50000">
+                    </div>
+                    <div class="input-group">
+                        <label for="hired-count">Количество нанятых сотрудников:</label>
+                        <input type="number" id="hired-count" placeholder="Например: 5">
+                    </div>
+                    <button onclick="calculateCostPerHire()" class="calc-button">Рассчитать стоимость найма</button>
+                    <div class="result" id="cost-per-hire-result"></div>
+                </div>
+            </div>
+
+            <div class="calculator-card">
+                <h3><i class="fas fa-graduation-cap"></i> ROI обучения</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="training-benefits">Выгоды от обучения (руб.):</label>
+                        <input type="number" id="training-benefits" placeholder="Например: 300000">
+                    </div>
+                    <div class="input-group">
+                        <label for="training-costs">Затраты на обучение (руб.):</label>
+                        <input type="number" id="training-costs" placeholder="Например: 100000">
+                    </div>
+                    <button onclick="calculateTrainingROI()" class="calc-button">Рассчитать ROI обучения</button>
+                    <div class="result" id="training-roi-result"></div>
+                </div>
+            </div>
+
+            <div class="calculator-card">
+                <h3><i class="fas fa-user-clock"></i> Уровень абсентеизма</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="absent-days">Количество пропущенных дней:</label>
+                        <input type="number" id="absent-days" placeholder="Например: 120">
+                    </div>
+                    <div class="input-group">
+                        <label for="total-workdays">Общее количество рабочих дней:</label>
+                        <input type="number" id="total-workdays" placeholder="Например: 3000">
+                    </div>
+                    <button onclick="calculateAbsenteeism()" class="calc-button">Рассчитать абсентеизм</button>
+                    <div class="result" id="absenteeism-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="templates-section">
+            <h2>📥 Скачать HR-шаблоны</h2>
+            <div class="templates-grid">
+                <a href="templates/hr-kpi.xlsx" class="template-card" download>
+                    <i class="fas fa-chart-pie"></i>
+                    <h4>Дашборд HR KPI</h4>
+                    <p>Мониторинг ключевых показателей персонала</p>
+                    <span class="file-size">~1.5 MB</span>
+                </a>
+                <a href="templates/employee-assessment.xlsx" class="template-card" download>
+                    <i class="fas fa-user-check"></i>
+                    <h4>Оценка сотрудников</h4>
+                    <p>Шаблоны для проведения оценки персонала</p>
+                    <span class="file-size">~1.2 MB</span>
+                </a>
+                <a href="templates/recruitment-plan.xlsx" class="template-card" download>
+                    <i class="fas fa-list-alt"></i>
+                    <h4>План подбора персонала</h4>
+                    <p>Планирование и учет рекрутинга</p>
+                    <span class="file-size">~1.0 MB</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Центр управления</h3>
+                    <p>Комплексные инструменты для эффективного управления</p>
+                </div>
+                <div class="footer-section">
+                    <h4>HR-инструменты</h4>
+                    <ul>
+                        <li><a href="#">Текучесть кадров</a></li>
+                        <li><a href="#">Стоимость найма</a></li>
+                        <li><a href="#">ROI обучения</a></li>
+                        <li><a href="#">Абсентеизм</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Центр управления. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/hr-calculators.js"></script>
+</body>
+</html>
