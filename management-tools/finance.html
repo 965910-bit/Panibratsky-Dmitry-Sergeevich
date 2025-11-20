@@ -1,1 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Финансовая аналитика - Центр управления</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calculators.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1><a href="../index.html" style="color: inherit; text-decoration: none;">📊 Центр управления</a></h1>
+                <span>Финансовая аналитика</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Главная визитка</a></li>
+                <li><a href="index.html">Все инструменты</a></li>
+                <li><a href="../index.html#about">О проекте</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <main class="container" style="margin-top: 120px; padding: 2rem 0;">
+        <div class="section-header">
+            <h1>Финансовые калькуляторы</h1>
+            <p>Расчет ключевых финансовых показателей и метрик</p>
+        </div>
+
+        <div class="calculators-grid">
+            <div class="calculator-card">
+                <h3><i class="fas fa-percentage"></i> Рентабельность продаж (ROS)</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="revenue">Выручка (руб.):</label>
+                        <input type="number" id="revenue" placeholder="Например: 1000000">
+                    </div>
+                    <div class="input-group">
+                        <label for="profit">Прибыль от продаж (руб.):</label>
+                        <input type="number" id="profit" placeholder="Например: 150000">
+                    </div>
+                    <button onclick="calculateROS()" class="calc-button">Рассчитать ROS</button>
+                    <div class="result" id="ros-result"></div>
+                </div>
+            </div>
+
+            <div class="calculator-card">
+                <h3><i class="fas fa-chart-bar"></i> Рентабельность инвестиций (ROI)</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="investment-roi">Сумма инвестиций (руб.):</label>
+                        <input type="number" id="investment-roi" placeholder="Например: 500000">
+                    </div>
+                    <div class="input-group">
+                        <label for="net-profit">Чистая прибыль (руб.):</label>
+                        <input type="number" id="net-profit" placeholder="Например: 75000">
+                    </div>
+                    <button onclick="calculateROI()" class="calc-button">Рассчитать ROI</button>
+                    <div class="result" id="roi-result"></div>
+                </div>
+            </div>
+
+            <div class="calculator-card">
+                <h3><i class="fas fa-calendar-alt"></i> Срок окупаемости</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="investment-payback">Первоначальные инвестиции (руб.):</label>
+                        <input type="number" id="investment-payback" placeholder="Например: 1000000">
+                    </div>
+                    <div class="input-group">
+                        <label for="annual-cashflow">Годовой денежный поток (руб.):</label>
+                        <input type="number" id="annual-cashflow" placeholder="Например: 250000">
+                    </div>
+                    <button onclick="calculatePayback()" class="calc-button">Рассчитать срок окупаемости</button>
+                    <div class="result" id="payback-result"></div>
+                </div>
+            </div>
+
+            <div class="calculator-card">
+                <h3><i class="fas fa-calculator"></i> Чистая приведенная стоимость (NPV)</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label for="initial-investment">Начальные инвестиции (руб.):</label>
+                        <input type="number" id="initial-investment" placeholder="Например: 500000">
+                    </div>
+                    <div class="input-group">
+                        <label for="discount-rate">Ставка дисконтирования (%):</label>
+                        <input type="number" id="discount-rate" placeholder="Например: 10" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label for="cashflows">Денежные потоки (через запятую, руб.):</label>
+                        <input type="text" id="cashflows" placeholder="Например: 150000, 180000, 200000">
+                    </div>
+                    <button onclick="calculateNPV()" class="calc-button">Рассчитать NPV</button>
+                    <div class="result" id="npv-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="templates-section">
+            <h2>📥 Скачать шаблоны</h2>
+            <div class="templates-grid">
+                <a href="templates/financial-model.xlsx" class="template-card" download>
+                    <i class="fas fa-file-excel"></i>
+                    <h4>Финансовая модель</h4>
+                    <p>Комплексная модель для планирования и анализа</p>
+                    <span class="file-size">~2.5 MB</span>
+                </a>
+                <a href="templates/kpi-dashboard.xlsx" class="template-card" download>
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Дашборд KPI</h4>
+                    <p>Готовый дашборд для мониторинга показателей</p>
+                    <span class="file-size">~1.8 MB</span>
+                </a>
+                <a href="templates/ros-calculator.xlsx" class="template-card" download>
+                    <i class="fas fa-calculator"></i>
+                    <h4>Калькулятор рентабельности</h4>
+                    <p>Расчет всех видов рентабельности</p>
+                    <span class="file-size">~1.2 MB</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Центр управления</h3>
+                    <p>Комплексные инструменты для эффективного управления</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Финансовые инструменты</h4>
+                    <ul>
+                        <li><a href="#">Рентабельность</a></li>
+                        <li><a href="#">Инвестиции</a></li>
+                        <li><a href="#">Бюджетирование</a></li>
+                        <li><a href="#">Анализ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Центр управления. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/finance-calculators.js"></script>
+</body>
+</html>
