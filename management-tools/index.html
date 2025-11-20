@@ -3,149 +3,346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Инструменты управления - Центр управления предприятием</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Инструменты управления - Дмитрий Панибратский</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .tools-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .tools-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .tools-categories {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .category {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e1e5e9;
+        }
+        
+        .category h2 {
+            color: #2c5aa0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .tool-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .tool-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tool-card h3 {
+            color: #2c5aa0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tool-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #2c5aa0;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            background: #1e3d72;
+            transform: translateY(-1px);
+        }
+        
+        .file-size {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-brand">
-                <h1><a href="../index.html" style="color: inherit; text-decoration: none;">📊 Центр управления</a></h1>
-                <span>Инструменты управления предприятием</span>
-            </div>
+    <nav class="navigation">
+        <div class="container">
             <ul class="nav-links">
-                <li><a href="../index.html">Главная визитка</a></li>
-                <li><a href="index.html">Все инструменты</a></li>
-                <li><a href="../index.html#about">О проекте</a></li>
+                <li><a href="../index.html">← На главную</a></li>
+                <li><a href="#finance">Финансы</a></li>
+                <li><a href="#logistics">Логистика</a></li>
+                <li><a href="#hr">HR</a></li>
+                <li><a href="#projects">Проекты</a></li>
+                <li><a href="#security">Безопасность</a></li>
+                <li><a href="#procurement">Закупки</a></li>
             </ul>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Комплексная система управления предприятием</h1>
-                <p>Более 100 инструментов для анализа, оптимизации и контроля бизнес-процессов</p>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="number">50+</span>
-                        <span class="label">Калькуляторов</span>
-                    </div>
-                    <div class="stat">
-                        <span class="number">30+</span>
-                        <span class="label">Шаблонов</span>
-                    </div>
-                    <div class="stat">
-                        <span class="number">25+</span>
-                        <span class="label">Чек-листов</span>
-                    </div>
-                </div>
-                <button class="cta-button" onclick="scrollToSection('tools')">Начать работу</button>
-            </div>
         </div>
-    </section>
+    </nav>
 
-    <section id="tools" class="tools-section">
-        <div class="container">
-            <h2>Инструменты управления</h2>
-            <p class="section-subtitle">Выберите нужный раздел для работы</p>
-            <div class="tools-grid">
-                <div class="tool-card" onclick="location.href='finance.html'">
-                    <div class="tool-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Финансовая аналитика</h3>
-                    <p>Рентабельность, маржинальность, ROI, NPV расчеты</p>
-                    <div class="tool-features">
-                        <span>15+ калькуляторов</span>
-                        <span>10 шаблонов</span>
-                    </div>
-                </div>
-
-                <div class="tool-card" onclick="location.href='logistics.html'">
-                    <div class="tool-icon"><i class="fas fa-truck"></i></div>
-                    <h3>Логистика и склад</h3>
-                    <p>KPI, чек-листы, оптимизация запасов, карты процессов</p>
-                    <div class="tool-features">
-                        <span>25+ инструментов</span>
-                        <span>15 чек-листов</span>
-                    </div>
-                </div>
-
-                <div class="tool-card" onclick="location.href='hr.html'">
-                    <div class="tool-icon"><i class="fas fa-users"></i></div>
-                    <h3>Управление персоналом</h3>
-                    <p>ФОТ, премии, KPI, оценка, развитие сотрудников</p>
-                    <div class="tool-features">
-                        <span>20+ калькуляторов</span>
-                        <span>HR шаблоны</span>
-                    </div>
-                </div>
-
-                <div class="tool-card" onclick="location.href='projects.html'">
-                    <div class="tool-icon"><i class="fas fa-project-diagram"></i></div>
-                    <h3>Управление проектами</h3>
-                    <p>NPV, IRR, срок окупаемости, ROI проектов</p>
-                    <div class="tool-features">
-                        <span>10+ калькуляторов</span>
-                        <span>Шаблоны проектов</span>
-                    </div>
-                </div>
-
-                <div class="tool-card" onclick="location.href='control.html'">
-                    <div class="tool-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Контроль и аудит</h3>
-                    <p>Чек-листы аудита, KPI безопасности, управление рисками</p>
-                    <div class="tool-features">
-                        <span>30+ чек-листов</span>
-                        <span>Карты рисков</span>
-                    </div>
-                </div>
-
-                <div class="tool-card" onclick="location.href='procurement.html'">
-                    <div class="tool-icon"><i class="fas fa-shopping-cart"></i></div>
-                    <h3>Закупки и тендеры</h3>
-                    <p>Анализ поставщиков, калькуляторы тендеров, TCO</p>
-                    <div class="tool-features">
-                        <span>15+ инструментов</span>
-                        <span>Шаблоны договоров</span>
-                    </div>
-                </div>
-            </div>
+    <div class="tools-container">
+        <div class="tools-header">
+            <h1>📊 Профессиональные инструменты управления</h1>
+            <p>Готовые к использованию шаблоны с автоматическими расчетами и формулами</p>
         </div>
-    </section>
+
+        <div class="tools-categories">
+            <!-- Финансовые инструменты -->
+            <section id="finance" class="category">
+                <h2>💰 Финансовые модели и расчеты</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon">📈</div>
+                        <h3>Финансовая модель бизнеса</h3>
+                        <p class="tool-description">Комплексная модель с прогнозированием доходов, расходов, Cash Flow и ROI</p>
+                        <a href="../templates/financial-model.xlsx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Excel
+                        </a>
+                        <div class="file-size">~450 КБ</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-icon">📊</div>
+                        <h3>KPI Дашборд</h3>
+                        <p class="tool-description">Интерактивная панель показателей с автоматическими расчетами и графиками</p>
+                        <a href="../templates/kpi-dashboard.xlsx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Excel
+                        </a>
+                        <div class="file-size">~320 КБ</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-icon">🧮</div>
+                        <h3>Калькулятор ROS</h3>
+                        <p class="tool-description">Расчет рентабельности продаж и операционной эффективности</p>
+                        <a href="../templates/ros-calculator.xlsx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Excel
+                        </a>
+                        <div class="file-size">~280 КБ</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Логистика и склад -->
+            <section id="logistics" class="category">
+                <h2>🚚 Логистика и управление складом</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon">🏭</div>
+                        <h3>KPI Склада</h3>
+                        <p class="tool-description">Мониторинг ключевых показателей склада: оборачиваемость, точность, производительность</p>
+                        <a href="../templates/warehouse-kpi.xlsx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Excel
+                        </a>
+                        <div class="file-size">~380 КБ</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-icon">📦</div>
+                        <h3>Управление запасами</h3>
+                        <p class="tool-description">ABC-XYZ анализ, расчет страховых запасов, оптимизация уровней стоков</p>
+                        <a href="../templates/inventory-management.xlsx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Excel
+                        </a>
+                        <div class="file-size">~420 КБ</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-icon">✅</div>
+                        <h3>Чек-лист логистики</h3>
+                        <p class="tool-description">Комплексный чек-лист для аудита логистических процессов</p>
+                        <a href="../templates/logistics-checklist.xlsx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Excel
+                        </a>
+                        <div class="file-size">~250 КБ</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Управление персоналом -->
+            <section id="hr" class="category">
+                <h2>👥 Управление персоналом</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon">📋</div>
+                        <h3>KPI HR</h3>
+                        <p class="tool-description">Дашборд показателей отдела HR: текучесть, эффективность рекрутинга</p>
+                        <a href="../templates/hr-kpi.xlsx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Excel
+                        </a>
+                        <div class="file-size">~300 КБ</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-icon">⭐</div>
+                        <h3>Оценка сотрудников</h3>
+                        <p class="tool-description">Система оценки компетенций и performance review с автоматическим расчетом рейтингов</p>
+                        <a href="../templates/employee-assessment.xlsx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Excel
+                        </a>
+                        <div class="file-size">~350 КБ</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-icon">🎯</div>
+                        <h3>План найма</h3>
+                        <p class="tool-description">Планирование рекрутинга, расчет бюджета и сроков закрытия вакансий</p>
+                        <a href="../templates/recruitment-plan.xlsx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Excel
+                        </a>
+                        <div class="file-size">~280 КБ</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Управление проектами -->
+            <section id="projects" class="category">
+                <h2>📅 Управление проектами</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon">📄</div>
+                        <h3>Устав проекта</h3>
+                        <p class="tool-description">Структурированный шаблон устава проекта с разделами целей, стейкхолдеров, рисков</p>
+                        <a href="../templates/project-charter.docx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Word
+                        </a>
+                        <div class="file-size">~150 КБ</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-icon">📅</div>
+                        <h3>План проекта</h3>
+                        <p class="tool-description">Диаграмма Ганта с автоматическим расчетом сроков и ресурсов</p>
+                        <a href="../templates/project-plan.xlsx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Excel
+                        </a>
+                        <div class="file-size">~400 КБ</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-icon">⚠️</div>
+                        <h3>Реестр рисков</h3>
+                        <p class="tool-description">Матрица рисков с расчетом приоритетов и планами реагирования</p>
+                        <a href="../templates/risk-register.xlsx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Excel
+                        </a>
+                        <div class="file-size">~320 КБ</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Безопасность и аудит -->
+            <section id="security" class="category">
+                <h2>🛡️ Безопасность и аудит</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon">🔍</div>
+                        <h3>Чек-лист аудита</h3>
+                        <p class="tool-description">Комплексный чек-лист для проведения внутреннего аудита процессов</p>
+                        <a href="../templates/audit-checklist.xlsx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Excel
+                        </a>
+                        <div class="file-size">~280 КБ</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-icon">🎲</div>
+                        <h3>Матрица рисков</h3>
+                        <p class="tool-description">Матрица для оценки и визуализации рисков по вероятности и воздействию</p>
+                        <a href="../templates/risk-matrix.xlsx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Excel
+                        </a>
+                        <div class="file-size">~220 КБ</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-icon">🔒</div>
+                        <h3>Политика безопасности</h3>
+                        <p class="tool-description">Шаблон корпоративной политики информационной безопасности</p>
+                        <a href="../templates/security-policy.docx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Word
+                        </a>
+                        <div class="file-size">~180 КБ</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Закупки и поставщики -->
+            <section id="procurement" class="category">
+                <h2>📋 Закупки и управление поставщиками</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon">🏢</div>
+                        <h3>Оценка поставщиков</h3>
+                        <p class="tool-description">Система оценки и ранжирования поставщиков по качеству, цене, надежности</p>
+                        <a href="../templates/supplier-evaluation.xlsx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Excel
+                        </a>
+                        <div class="file-size">~350 КБ</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-icon">📑</div>
+                        <h3>Тендерная документация</h3>
+                        <p class="tool-description">Шаблон полного пакета документов для проведения тендера</p>
+                        <a href="../templates/tender-documentation.docx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Word
+                        </a>
+                        <div class="file-size">~220 КБ</div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-icon">📊</div>
+                        <h3>План закупок</h3>
+                        <p class="tool-description">Годовой план закупок с бюджетированием и графиком поставок</p>
+                        <a href="../templates/procurement-plan.xlsx" download class="download-btn">
+                            <i class="fas fa-download"></i> Скачать Excel
+                        </a>
+                        <div class="file-size">~300 КБ</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
 
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Центр управления</h3>
-                    <p>Комплексные инструменты для эффективного управления предприятием</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Разделы</h4>
-                    <ul>
-                        <li><a href="finance.html">Финансы</a></li>
-                        <li><a href="logistics.html">Логистика</a></li>
-                        <li><a href="hr.html">Персонал</a></li>
-                        <li><a href="projects.html">Проекты</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Ресурсы</h4>
-                    <ul>
-                        <li><a href="#templates">Шаблоны</a></li>
-                        <li><a href="#calculators">Калькуляторы</a></li>
-                        <li><a href="#checklists">Чек-листы</a></li>
-                        <li><a href="#methodologies">Методики</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Центр управления. Все права защищены.</p>
-            </div>
+            <p>&copy; 2024 Дмитрий Панибратский. Все права защищены.</p>
+            <p>Профессиональные инструменты для эффективного управления</p>
         </div>
     </footer>
-
-    <script src="js/main.js"></script>
 </body>
 </html>
