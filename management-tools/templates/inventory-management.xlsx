@@ -1,1 +1,102 @@
+# create_inventory_management.py
+import openpyxl
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment
 
+def create_inventory_management():
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Управление запасами"
+    
+    # Заголовок
+    ws.merge_cells('A1:K1')
+    ws['A1'] = "АНАЛИЗ И УПРАВЛЕНИЕ ЗАПАСАМИ - ABC-XYZ АНАЛИЗ"
+    ws['A1'].font = Font(size=14, bold=True)
+    ws['A1'].alignment = Alignment(horizontal='center')
+    
+    # Данные по товарам
+    headers = ["Товар", "Группа", "Средний запас", "Стоимость ед.", "Общая стоимость", 
+               "Доля стоимости", "Накопленная доля", "Годовой объем продаж", 
+               "Коэф. вариации", "Категория ABC", "Категория XYZ"]
+    ws.append(headers)
+    
+    sample_data = [
+        ["Товар A", "Электроника", 100, 5000, "", "", "", 1200, 0.15],
+        ["Товар B", "Электроника", 200, 2500, "", "", "", 2400, 0.08],
+        ["Товар C", "Мебель", 50, 15000, "", "", "", 600, 0.25],
+        ["Товар D", "Одежда", 300, 800, "", "", "", 3600, 0.12],
+        ["Товар E", "Одежда", 150, 1200, "", "", "", 1800, 0.18],
+        ["Товар F", "Аксессуары", 400, 300, "", "", "", 4800, 0.05],
+        ["Товар G", "Аксессуары", 80, 2000, "", "", "", 960, 0.30],
+        ["Товар H", "Электроника", 60, 8000, "", "", "", 720, 0.22]
+    ]
+    
+    for row in sample_data:
+        ws.append(row)
+    
+    # Формулы
+    for row in range(3, 11):
+        # Общая стоимость = Средний запас * Стоимость ед.
+        ws[f'E{row}'] = f'=C{row}*D{row}'
+        # Доля стоимости
+        ws[f'F{row}'] = f'=E{row}/SUM(E3:E11)'
+        # Накопленная доля
+        if row == 3:
+            ws[f'G{row}'] = f'=F{row}'
+        else:
+            ws[f'G{row}'] = f'=G{row-1}+F{row}'
+        # Категория ABC
+        ws[f'J{row}'] = f'=IF(G{row}<=0.8,"A",IF(G{row}<=0.95,"B","C"))'
+        # Категория XYZ
+        ws[f'K{row}'] = f'=IF(I{row}<=0.1,"X",IF(I{row}<=0.25,"Y","Z"))'
+    
+    # Сортировка по стоимости (вручную)
+    ws['L1'] = "СОРТИРОВКА ПО СТОИМОСТИ"
+    ws['L1'].font = Font(bold=True)
+    
+    # Матрица ABC-XYZ
+    ws_matrix = wb.create_sheet("Матрица ABC-XYZ")
+    ws_matrix.append(["", "X (стабильный)", "Y (переменный)", "Z (непредсказуемый)"])
+    
+    matrix_data = [
+        ["A (высокая стоимость)", "AX", "AY", "AZ"],
+        ["B (средняя стоимость)", "BX", "BY", "BZ"],
+        ["C (низкая стоимость)", "CX", "CY", "CZ"]
+    ]
+    
+    for row in matrix_data:
+        ws_matrix.append(row)
+    
+    # Подсчет количества товаров в каждой категории
+    for i, abc in enumerate(["A", "B", "C"]):
+        for j, xyz in enumerate(["X", "Y", "Z"]):
+            count_formula = f'=COUNTIFS(\'Управление запасами\'!J3:J11,"{abc}",\'Управление запасами\'!K3:K11,"{xyz}")'
+            ws_matrix.cell(row=i+2, column=j+2).value = count_formula
+    
+    # Расчет оптимального уровня запасов
+    ws_calc = wb.create_sheet("Расчет запасов")
+    ws_calc.append(["Товар", "Средний спрос", "Срок поставки", "Страховой запас", "Точка заказа"])
+    
+    for row in range(3, 11):
+        product = ws[f'A{row}'].value
+        avg_demand = ws[f'H{row}'].value / 12  # Среднемесячный спрос
+        lead_time = 15  # дней
+        service_level = 1.65  # для 95% уровня сервиса
+        std_dev = avg_demand * ws[f'I{row}'].value  # стандартное отклонение
+        
+        safety_stock = service_level * std_dev * (lead_time/30)**0.5
+        reorder_point = avg_demand * (lead_time/30) + safety_stock
+        
+        ws_calc.append([product, avg_demand, lead_time, safety_stock, reorder_point])
+    
+    # Форматирование
+    for sheet in [ws, ws_matrix, ws_calc]:
+        for col in range(1, len(headers) + 1):
+            if sheet == ws:
+                sheet.cell(row=2, column=col).font = Font(bold=True)
+                sheet.cell(row=2, column=col).fill = PatternFill(start_color="4F81BD", end_color="4F81BD", fill_type="solid")
+                sheet.cell(row=2, column=col).font = Font(color="FFFFFF", bold=True)
+    
+    wb.save("templates/inventory-management.xlsx")
+
+create_inventory_management()
