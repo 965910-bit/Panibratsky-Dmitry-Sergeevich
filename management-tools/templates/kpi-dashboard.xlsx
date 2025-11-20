@@ -1,1 +1,89 @@
+# create_kpi_dashboard.py
+import openpyxl
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment
+from openpyxl.chart import BarChart, Reference
 
+def create_kpi_dashboard():
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "KPI Дашборд"
+    
+    # Заголовок
+    ws.merge_cells('A1:H1')
+    ws['A1'] = "ДИНАМИКА КЛЮЧЕВЫХ ПОКАЗАТЕЛЕЙ ЭФФЕКТИВНОСТИ"
+    ws['A1'].font = Font(size=16, bold=True)
+    ws['A1'].alignment = Alignment(horizontal='center')
+    
+    # Данные
+    headers = ["Показатель", "Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Тренд"]
+    ws.append(headers)
+    
+    kpi_data = [
+        ["Оборачиваемость запасов (дни)", 45, 42, 40, 38, 36, 35],
+        ["Точность прогноза (%)", 75, 78, 80, 82, 85, 87],
+        ["Уровень сервиса (%)", 92, 93, 94, 95, 96, 97],
+        ["Производительность труда", 100, 105, 108, 112, 115, 118],
+        ["Срок поставки (дни)", 5, 4.5, 4, 3.5, 3, 2.8],
+        ["Логистические затраты (%)", 12, 11.5, 11, 10.5, 10, 9.8]
+    ]
+    
+    for row in kpi_data:
+        ws.append(row)
+    
+    # Добавляем формулы для тренда (упрощенная версия)
+    for row in range(3, 9):
+        jan_value = ws[f'B{row}'].value
+        jun_value = ws[f'G{row}'].value
+        if jan_value and jun_value:
+            trend = ((jun_value - jan_value) / jan_value) * 100
+            ws[f'H{row}'] = f'=IF(B{row}>0, (G{row}-B{row})/B{row}*100, 0)'
+    
+    # Форматирование
+    for col in range(1, 9):
+        ws.cell(row=2, column=col).font = Font(bold=True)
+        ws.cell(row=2, column=col).fill = PatternFill(start_color="4F81BD", end_color="4F81BD", fill_type="solid")
+        ws.cell(row=2, column=col).font = Font(color="FFFFFF", bold=True)
+    
+    # Форматирование чисел
+    for row in range(3, 9):
+        for col in range(2, 8):
+            cell = ws.cell(row=row, column=col)
+            if row == 3:  # Оборачиваемость
+                cell.number_format = '0.0'
+            elif row == 4:  # Точность прогноза
+                cell.number_format = '0%'
+            elif row == 5:  # Уровень сервиса
+                cell.number_format = '0%'
+            elif row == 6:  # Производительность
+                cell.number_format = '0'
+            elif row == 7:  # Срок поставки
+                cell.number_format = '0.0'
+            elif row == 8:  # Логистические затраты
+                cell.number_format = '0.0%'
+    
+    # Форматирование тренда
+    for row in range(3, 9):
+        cell = ws.cell(row=row, column=8)
+        cell.number_format = '0.0%'
+    
+    # Сводная таблица эффективности
+    ws_summary = wb.create_sheet("Сводка")
+    ws_summary.append(["Показатель", "Значение", "Целевое", "Отклонение", "Статус"])
+    summary_data = [
+        ["Общая эффективность", "=СРЗНАЧ('KPI Дашборд'!H3:H8)", "10%"],
+        ["Лучший показатель", "=МАКС('KPI Дашборд'!H3:H8)", "15%"],
+        ["Худший показатель", "=МИН('KPI Дашборд'!H3:H8)", "5%"]
+    ]
+    
+    for row in summary_data:
+        ws_summary.append(row)
+    
+    # Формулы для сводки
+    for row in range(2, 5):
+        ws_summary[f'D{row}'] = f'=B{row}-C{row}'
+        ws_summary[f'E{row}'] = f'=IF(B{row}>=C{row},"✅ Достигнуто","⚠️ Требует внимания")'
+    
+    wb.save("templates/kpi-dashboard.xlsx")
+
+create_kpi_dashboard()
