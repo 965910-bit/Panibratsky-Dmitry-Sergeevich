@@ -1,1 +1,95 @@
+# create_ros_calculator.py
+import openpyxl
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment
 
+def create_ros_calculator():
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Калькулятор ROS"
+    
+    # Заголовок
+    ws.merge_cells('A1:D1')
+    ws['A1'] = "КАЛЬКУЛЯТОР РЕНТАБЕЛЬНОСТИ ПРОДАЖ (ROS)"
+    ws['A1'].font = Font(size=14, bold=True)
+    ws['A1'].alignment = Alignment(horizontal='center')
+    
+    # Входные данные
+    ws['A3'] = "ВХОДНЫЕ ДАННЫЕ"
+    ws['A3'].font = Font(bold=True)
+    
+    input_data = [
+        ["Показатель", "Значение", "Ед.изм.", "Формула"],
+        ["Выручка за период", 5000000, "руб.", "Ввод"],
+        ["Операционная прибыль", 750000, "руб.", "Ввод"],
+        ["ROS (Return on Sales)", "", "%", "=Операционная_прибыль/Выручка"],
+        ["Целевой ROS", 20, "%", "Ввод"],
+        ["Требуемая операционная прибыль", "", "руб.", "=Выручка*Целевой_ROS"],
+        ["Отклонение от цели", "", "руб.", "=Требуемая_прибыль-Операционная_прибыль"]
+    ]
+    
+    for row in input_data:
+        ws.append(row)
+    
+    # Назначаем имена ячейкам для удобства
+    ws['B5'] = 5000000  # Выручка
+    ws['B6'] = 750000   # Операционная прибыль
+    ws['B8'] = 20       # Целевой ROS
+    
+    # Формулы
+    ws['B7'] = "=IF(B5>0,B6/B5,0)"  # ROS
+    ws['B9'] = "=B5*B8/100"         # Требуемая операционная прибыль
+    ws['B10'] = "=B9-B6"            # Отклонение
+    
+    # Анализ чувствительности
+    ws['A12'] = "АНАЛИЗ ЧУВСТВИТЕЛЬНОСТИ"
+    ws['A12'].font = Font(bold=True)
+    
+    sensitivity_headers = ["Вариант", "Выручка", "Операционная прибыль", "ROS", "Отклонение от цели"]
+    ws.append(sensitivity_headers)
+    
+    scenarios = [
+        ["Пессимистичный", 4500000, 600000],
+        ["Текущий", 5000000, 750000],
+        ["Оптимистичный", 5500000, 900000],
+        ["Целевой", 5000000, 1000000]
+    ]
+    
+    for scenario in scenarios:
+        ws.append(scenario)
+    
+    # Формулы для анализа
+    for row in range(14, 18):
+        ws[f'D{row}'] = f'=IF(B{row}>0,C{row}/B{row},0)'  # ROS
+        ws[f'E{row}'] = f'=B{row}*$B$8/100-C{row}'       # Отклонение
+    
+    # Форматирование
+    for row in range(4, 11):
+        ws[f'A{row}'].font = Font(bold=True)
+    
+    for row in range(13, 18):
+        ws[f'A{row}'].font = Font(bold=True)
+    
+    # Форматирование чисел
+    for row in [5, 6, 9, 10]:
+        ws[f'B{row}'].number_format = '#,##0'
+    
+    ws['B7'].number_format = '0.00%'
+    ws['B8'].number_format = '0%'
+    
+    for row in range(14, 18):
+        for col in [2, 3, 5]:
+            ws.cell(row=row, column=col).number_format = '#,##0'
+        ws.cell(row=row, column=4).number_format = '0.00%'
+    
+    # Условное форматирование для ROS
+    from openpyxl.formatting.rule import CellIsRule
+    green_fill = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
+    red_fill = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
+    
+    ws.conditional_formatting.add('B7', CellIsRule(operator='greaterThanOrEqual', formula=['B8'], fill=green_fill))
+    ws.conditional_formatting.add('B7', CellIsRule(operator='lessThan', formula=['B8'], fill=red_fill))
+    
+    wb.save("templates/ros-calculator.xlsx")
+
+create_ros_calculator()
