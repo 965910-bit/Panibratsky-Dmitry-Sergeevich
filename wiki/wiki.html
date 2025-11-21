@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База знаний - Организационная структура</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 5px solid var(--secondary);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        
+        .card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+        
+        .features {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🏢 База знаний</h1>
+        <p>Полное руководство по организационной структуре международной компании</p>
+    </header>
+
+    <div class="container">
+        <div class="grid">
+            <div class="card">
+                <h3>🌍 Глобальная структура</h3>
+                <p>Корпоративное управление, региональные HQ, центры превосходства. Изучите многоуровневую систему управления международной компании.</p>
+                <a href="https://github.com/965910-bit/Panibratsky-Dmitry-Sergeevich/wiki/Глобальная-структура" class="btn">Изучить →</a>
+            </div>
+            
+            <div class="card">
+                <h3>🇷🇺 Структура для РФ</h3>
+                <p>Адаптированная организационная структура для российского подразделения с учетом локальной специфики и законодательства.</p>
+                <a href="https://github.com/965910-bit/Panibratsky-Dmitry-Sergeevich/wiki/Структура-РФ" class="btn">Изучить →</a>
+            </div>
+            
+            <div class="card">
+                <h3>🛠️ Инструменты и шаблоны</h3>
+                <p>Калькуляторы KPI, шаблоны документов, чек-листы и другие практические инструменты для управления структурой.</p>
+                <a href="https://github.com/965910-bit/Panibratsky-Dmitry-Sergeevich/wiki/Home#-интерактивные-инструменты" class="btn">Использовать →</a>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary);">✨ Что внутри?</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <h4>Детальные KPI</h4>
+                    <p>Система показателей для всех должностей</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📝</div>
+                    <h4>Готовые шаблоны</h4>
+                    <p>Должностные инструкции и регламенты</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔄</div>
+                    <h4>Процессы и регламенты</h4>
+                    <p>Стандартизированные бизнес-процессы</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✅</div>
+                    <h4>Чек-листы</h4>
+                    <p>Контрольные списки для всех процедур</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>База знаний по организационной структуре | Обновлено: Декабрь 2024</p>
+        <p><a href="https://965910-bit.github.io/Panibratsky-Dmitry-Sergeevich/" style="color: white;">← Назад на главный сайт</a></p>
+    </footer>
+</body>
+</html>
