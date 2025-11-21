@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База знаний - Центр управления</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/wiki.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1><a href="index.html">📊 Центр управления</a></h1>
+                <span>База знаний</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="index.html#tools">Инструменты</a></li>
+                <li><a href="knowledge-base.html">База знаний</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="wiki-container">
+        <div class="container">
+            <!-- Поиск -->
+            <div class="wiki-search">
+                <div class="search-box">
+                    <input type="text" id="wikiSearch" placeholder="Найти инструкцию...">
+                    <button>Найти</button>
+                </div>
+            </div>
+
+            <div class="wiki-layout">
+                <!-- Боковое меню -->
+                <aside class="wiki-sidebar">
+                    <h3>📚 Разделы знаний</h3>
+                    <ul class="nav-categories">
+                        <li class="nav-category active">Все материалы</li>
+                        <li class="nav-category">Финансы</li>
+                        <li class="nav-category">Логистика</li>
+                        <li class="nav-category">Персонал</li>
+                        <li class="nav-category">Проекты</li>
+                    </ul>
+                </aside>
+
+                <!-- Основной контент -->
+                <div class="wiki-content">
+                    <section class="wiki-hero">
+                        <h1>База знаний по управлению</h1>
+                        <p>Здесь вы найдете инструкции для всех отделов компании</p>
+                    </section>
+
+                    <!-- Быстрый старт -->
+                    <section class="wiki-section">
+                        <h2>🚀 Быстрый старт</h2>
+                        <div class="quick-start-cards">
+                            <div class="start-card">
+                                <h3>1. Выберите раздел</h3>
+                                <p>Найдите нужный вам отдел в меню слева</p>
+                            </div>
+                            <div class="start-card">
+                                <h3>2. Используйте калькуляторы</h3>
+                                <p>Рассчитайте показатели с помощью готовых инструментов</p>
+                            </div>
+                            <div class="start-card">
+                                <h3>3. Скачайте шаблоны</h3>
+                                <p>Используйте готовые файлы для работы</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Финансы -->
+                    <section class="wiki-section">
+                        <h2>💰 Финансовый отдел</h2>
+                        <div class="articles-grid">
+                            <article class="wiki-article">
+                                <h3>Как считать рентабельность</h3>
+                                <p>Простая инструкция по расчету ROS, ROA, ROE</p>
+                                <div class="article-actions">
+                                    <button>Читать</button>
+                                    <button>Скачать шаблон</button>
+                                </div>
+                            </article>
+
+                            <article class="wiki-article">
+                                <h3>Расчет NPV и IRR</h3>
+                                <p>Оценка эффективности инвестиционных проектов</p>
+                                <div class="article-actions">
+                                    <button>Читать</button>
+                                    <button>Скачать калькулятор</button>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+
+                    <!-- Логистика -->
+                    <section class="wiki-section">
+                        <h2>🚚 Логистика и склад</h2>
+                        <div class="articles-grid">
+                            <article class="wiki-article">
+                                <h3>Чек-листы приемки товара</h3>
+                                <p>Пошаговая проверка при приемке на склад</p>
+                                <div class="article-actions">
+                                    <button>Читать</button>
+                                    <button>Скачать чек-лист</button>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Центр управления</p>
+        </div>
+    </footer>
+
+    <script src="js/wiki.js"></script>
+</body>
+</html>
