@@ -1,1 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор бонуса менеджера</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .calculator {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .bonus-amount {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c5530;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .breakdown {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>🧮 Калькулятор бонуса менеджера</h1>
+        
+        <div class="form-group">
+            <label for="salary">Оклад (руб):</label>
+            <input type="number" id="salary" value="150000" min="0">
+        </div>
+        
+        <div class="form-group">
+            <label for="revenue">% выполнения плана по выручке:</label>
+            <input type="number" id="revenue" value="100" min="0" max="150">
+        </div>
+        
+        <div class="form-group">
+            <label for="margin">% выполнения плана по марже:</label>
+            <input type="number" id="margin" value="100" min="0" max="150">
+        </div>
+        
+        <div class="form-group">
+            <label for="nps">NPS клиента (0-100):</label>
+            <input type="number" id="nps" value="75" min="0" max="100">
+        </div>
+        
+        <button onclick="calculateBonus()">Рассчитать бонус</button>
+        
+        <div id="result" class="result" style="display: none;">
+            <h3>Результат расчета:</h3>
+            <div class="bonus-amount" id="bonusAmount"></div>
+            <div class="breakdown" id="breakdown"></div>
+        </div>
+    </div>
 
+    <script>
+        function calculateBonus() {
+            const salary = parseFloat(document.getElementById('salary').value);
+            const revenue = parseFloat(document.getElementById('revenue').value) / 100;
+            const margin = parseFloat(document.getElementById('margin').value) / 100;
+            const nps = parseFloat(document.getElementById('nps').value) / 100;
+            
+            // Ограничиваем коэффициенты согласно формуле
+            const K1 = Math.min(revenue, 1.5);
+            const K2 = Math.min(margin, 1.5); 
+            const K3 = Math.min(nps, 1.2);
+            
+            const bonus = salary * (K1 * 0.5 + K2 * 0.3 + K3 * 0.2);
+            
+            document.getElementById('bonusAmount').textContent = 
+                `${bonus.toLocaleString('ru-RU')} руб.`;
+            
+            document.getElementById('breakdown').innerHTML = `
+                <strong>Детализация:</strong><br>
+                - Выручка (K1): ${(K1 * 100).toFixed(1)}%<br>
+                - Маржа (K2): ${(K2 * 100).toFixed(1)}%<br>  
+                - NPS (K3): ${(K3 * 100).toFixed(1)}%<br>
+                <em>Формула: Оклад × (K1×0.5 + K2×0.3 + K3×0.2)</em>
+            `;
+            
+            document.getElementById('result').style.display = 'block';
+        }
+        
+        // Авторасчет при загрузке
+        window.onload = calculateBonus;
+    </script>
+</body>
+</html>
