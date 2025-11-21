@@ -1,3 +1,4 @@
+/* Основные стили для Wiki */
 * {
     margin: 0;
     padding: 0;
@@ -8,92 +9,295 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #f5f5f5;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
 }
 
-.container {
-    max-width: 1200px;
+.wiki-container {
+    max-width: 1400px;
     margin: 0 auto;
     padding: 20px;
 }
 
-header {
-    background: #2c3e50;
-    color: white;
-    padding: 1rem;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-header h1 {
-    text-align: center;
-}
-
-.main-content {
-    display: flex;
-    gap: 20px;
-    min-height: 70vh;
-}
-
-.sidebar {
-    flex: 0 0 300px;
+/* Шапка */
+.wiki-header {
     background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
-.sidebar ul {
-    list-style: none;
+.wiki-header h1 {
+    color: #2c5aa0;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
 }
 
-.sidebar li {
-    margin-bottom: 10px;
+.wiki-header p {
+    color: #666;
+    font-size: 1.2rem;
 }
 
-.sidebar a {
-    display: block;
-    padding: 10px;
-    color: #2c3e50;
-    text-decoration: none;
-    border-radius: 3px;
+/* Поиск */
+.wiki-search {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 2rem;
+}
+
+.wiki-search input {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.wiki-search button {
+    background: #2c5aa0;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1rem;
     transition: all 0.3s ease;
 }
 
-.sidebar a:hover {
-    background: #3498db;
+.wiki-search button:hover {
+    background: #1e3a8a;
+    transform: translateY(-2px);
+}
+
+/* Основной контент */
+.wiki-content {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2rem;
+}
+
+/* Боковое меню */
+.wiki-sidebar {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+.wiki-sidebar h3 {
+    color: #2c5aa0;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.wiki-sidebar h4 {
+    color: #2c5aa0;
+    margin: 1.5rem 0 1rem 0;
+}
+
+.sidebar-menu {
+    list-style: none;
+}
+
+.sidebar-menu li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu a.active {
+    background: #2c5aa0;
     color: white;
 }
 
-.content {
-    flex: 1;
+.quick-links ul {
+    list-style: none;
+}
+
+.quick-links li {
+    margin-bottom: 0.5rem;
+}
+
+.quick-links a {
+    display: block;
+    padding: 10px 15px;
+    color: #555;
+    text-decoration: none;
+    border-left: 3px solid #2c5aa0;
+    transition: all 0.3s ease;
+}
+
+.quick-links a:hover {
+    background: #f8f9fa;
+    padding-left: 20px;
+}
+
+/* Основная область */
+.wiki-main {
     background: white;
-    padding: 30px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    min-height: 600px;
 }
 
-.content h2 {
-    color: #2c3e50;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #3498db;
+.welcome-message h2 {
+    color: #2c5aa0;
+    margin-bottom: 1rem;
 }
 
-.content p {
-    margin-bottom: 15px;
+.welcome-message p {
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
 }
 
+.featured-articles h3 {
+    color: #2c5aa0;
+    margin-bottom: 1.5rem;
+}
+
+.article-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.article-card {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid #2c5aa0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.article-card i {
+    font-size: 2rem;
+    color: #2c5aa0;
+    margin-bottom: 1rem;
+}
+
+.article-card h4 {
+    color: #2c5aa0;
+    margin-bottom: 0.5rem;
+}
+
+.article-card p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Контент статей */
+.article-content {
+    animation: fadeIn 0.5s ease;
+}
+
+.article-header {
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.article-header h2 {
+    color: #2c5aa0;
+    font-size: 2rem;
+}
+
+.article-meta {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.article-body {
+    line-height: 1.8;
+}
+
+.article-body h3 {
+    color: #2c5aa0;
+    margin: 1.5rem 0 1rem 0;
+}
+
+.article-body p {
+    margin-bottom: 1rem;
+}
+
+.article-body ul, .article-body ol {
+    margin: 1rem 0 1rem 2rem;
+}
+
+.article-body li {
+    margin-bottom: 0.5rem;
+}
+
+.step {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    border-left: 4px solid #2c5aa0;
+}
+
+.tip {
+    background: #e7f5ff;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    border-left: 4px solid #3498db;
+}
+
+.warning {
+    background: #fff0e7;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    border-left: 4px solid #e53e3e;
+}
+
+/* Утилиты */
 .hidden {
     display: none;
 }
 
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Адаптивность */
 @media (max-width: 768px) {
-    .main-content {
-        flex-direction: column;
+    .wiki-content {
+        grid-template-columns: 1fr;
     }
     
-    .sidebar {
-        flex: none;
+    .wiki-sidebar {
+        position: static;
+        margin-bottom: 2rem;
+    }
+    
+    .article-cards {
+        grid-template-columns: 1fr;
     }
 }
