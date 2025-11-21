@@ -3,27 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>База знаний</title>
+    <title>База знаний - Центр управления</title>
     <link rel="stylesheet" href="css/wiki.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>База знаний</h1>
+    <div class="wiki-container">
+        <header class="wiki-header">
+            <h1><i class="fas fa-book"></i> База знаний</h1>
+            <p>Все инструкции и руководства в одном месте</p>
         </header>
-        
-        <div class="main-content">
-            <nav class="sidebar">
-                <ul id="articles-list">
-                    <!-- Статьи будут загружены через JS -->
+
+        <div class="wiki-search">
+            <input type="text" id="searchInput" placeholder="Поиск по базе знаний...">
+            <button onclick="searchArticles()"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="wiki-content">
+            <!-- Боковое меню -->
+            <nav class="wiki-sidebar">
+                <h3>Категории</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="#" onclick="showCategory('all')" class="active"><i class="fas fa-home"></i> Все статьи</a></li>
+                    <li><a href="#" onclick="showCategory('finance')"><i class="fas fa-chart-line"></i> Финансы</a></li>
+                    <li><a href="#" onclick="showCategory('logistics')"><i class="fas fa-truck"></i> Логистика</a></li>
+                    <li><a href="#" onclick="showCategory('hr')"><i class="fas fa-users"></i> Персонал</a></li>
+                    <li><a href="#" onclick="showCategory('projects')"><i class="fas fa-project-diagram"></i> Проекты</a></li>
                 </ul>
+
+                <div class="quick-links">
+                    <h4>Популярные статьи</h4>
+                    <ul>
+                        <li><a href="#" onclick="showArticle('ros-guide')">Как рассчитать рентабельность</a></li>
+                        <li><a href="#" onclick="showArticle('inventory-guide')">Управление запасами</a></li>
+                        <li><a href="#" onclick="showArticle('kpi-guide')">Настройка KPI</a></li>
+                    </ul>
+                </div>
             </nav>
-            
-            <main class="content">
-                <article id="article-content">
-                    <h2>Добро пожаловать в базу знаний</h2>
-                    <p>Выберите статью из списка слева для просмотра.</p>
-                </article>
+
+            <!-- Основной контент -->
+            <main class="wiki-main">
+                <div class="welcome-message" id="welcomeMessage">
+                    <h2>Добро пожаловать в базу знаний!</h2>
+                    <p>Выберите категорию или статью из меню слева, чтобы начать изучение.</p>
+                    
+                    <div class="featured-articles">
+                        <h3>🚀 Начните с этих статей:</h3>
+                        <div class="article-cards">
+                            <div class="article-card" onclick="showArticle('ros-guide')">
+                                <i class="fas fa-calculator"></i>
+                                <h4>Расчёт рентабельности</h4>
+                                <p>Пошаговое руководство по финансовым показателям</p>
+                            </div>
+                            <div class="article-card" onclick="showArticle('checklist-guide')">
+                                <i class="fas fa-clipboard-check"></i>
+                                <h4>Работа с чек-листами</h4>
+                                <p>Как эффективно использовать контрольные списки</p>
+                            </div>
+                            <div class="article-card" onclick="showArticle('kpi-guide')">
+                                <i class="fas fa-chart-bar"></i>
+                                <h4>Система KPI</h4>
+                                <p>Настройка и мониторинг ключевых показателей</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="article-content hidden" id="articleContent">
+                    <!-- Сюда будет загружаться контент статей -->
+                </div>
             </main>
         </div>
     </div>
