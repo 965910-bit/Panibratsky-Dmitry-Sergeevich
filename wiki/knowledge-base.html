@@ -3,78 +3,335 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>База знаний - Центр управления</title>
+    <title>База знаний - Центр управления предприятием</title>
     <link rel="stylesheet" href="css/wiki.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="wiki-container">
-        <header class="wiki-header">
-            <h1><i class="fas fa-book"></i> База знаний</h1>
-            <p>Все инструкции и руководства в одном месте</p>
-        </header>
-
-        <div class="wiki-search">
-            <input type="text" id="searchInput" placeholder="Поиск по базе знаний...">
-            <button onclick="searchArticles()"><i class="fas fa-search"></i></button>
+    <!-- Хедер -->
+    <header class="wiki-header">
+        <div class="header-container">
+            <div class="header-brand">
+                <h1><i class="fas fa-book-open"></i> База знаний</h1>
+                <p>Энциклопедия управления предприятием</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-primary" onclick="showAllArticles()">
+                    <i class="fas fa-list"></i> Все статьи
+                </button>
+                <button class="btn-secondary" onclick="showRandomArticle()">
+                    <i class="fas fa-random"></i> Случайная статья
+                </button>
+            </div>
         </div>
+    </header>
 
-        <div class="wiki-content">
-            <!-- Боковое меню -->
-            <nav class="wiki-sidebar">
-                <h3>Категории</h3>
-                <ul class="sidebar-menu">
-                    <li><a href="#" onclick="showCategory('all')" class="active"><i class="fas fa-home"></i> Все статьи</a></li>
-                    <li><a href="#" onclick="showCategory('finance')"><i class="fas fa-chart-line"></i> Финансы</a></li>
-                    <li><a href="#" onclick="showCategory('logistics')"><i class="fas fa-truck"></i> Логистика</a></li>
-                    <li><a href="#" onclick="showCategory('hr')"><i class="fas fa-users"></i> Персонал</a></li>
-                    <li><a href="#" onclick="showCategory('projects')"><i class="fas fa-project-diagram"></i> Проекты</a></li>
-                </ul>
-
-                <div class="quick-links">
-                    <h4>Популярные статьи</h4>
-                    <ul>
-                        <li><a href="#" onclick="showArticle('ros-guide')">Как рассчитать рентабельность</a></li>
-                        <li><a href="#" onclick="showArticle('inventory-guide')">Управление запасами</a></li>
-                        <li><a href="#" onclick="showArticle('kpi-guide')">Настройка KPI</a></li>
-                    </ul>
+    <!-- Поиск и фильтры -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Поиск по 150+ статьям...">
+                    <button onclick="performSearch()">Найти</button>
                 </div>
-            </nav>
+                <div class="search-filters">
+                    <select id="categoryFilter" onchange="filterByCategory()">
+                        <option value="all">Все категории</option>
+                        <option value="finance">💰 Финансы</option>
+                        <option value="logistics">🚚 Логистика</option>
+                        <option value="hr">👥 Персонал</option>
+                        <option value="projects">📊 Проекты</option>
+                        <option value="control">🛡️ Контроль</option>
+                        <option value="sales">📈 Продажи</option>
+                        <option value="production">🏭 Производство</option>
+                    </select>
+                    <select id="difficultyFilter" onchange="filterByDifficulty()">
+                        <option value="all">Любая сложность</option>
+                        <option value="beginner">👶 Начальный</option>
+                        <option value="intermediate">🎯 Средний</option>
+                        <option value="advanced">🔥 Продвинутый</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <!-- Основной контент -->
-            <main class="wiki-main">
-                <div class="welcome-message" id="welcomeMessage">
-                    <h2>Добро пожаловать в базу знаний!</h2>
-                    <p>Выберите категорию или статью из меню слева, чтобы начать изучение.</p>
-                    
-                    <div class="featured-articles">
-                        <h3>🚀 Начните с этих статей:</h3>
-                        <div class="article-cards">
-                            <div class="article-card" onclick="showArticle('ros-guide')">
-                                <i class="fas fa-calculator"></i>
-                                <h4>Расчёт рентабельности</h4>
-                                <p>Пошаговое руководство по финансовым показателям</p>
+    <!-- Основной контент -->
+    <main class="wiki-main">
+        <div class="container">
+            <div class="wiki-layout">
+                <!-- Боковая панель -->
+                <aside class="wiki-sidebar">
+                    <nav class="sidebar-nav">
+                        <div class="nav-section">
+                            <h3><i class="fas fa-compass"></i> Навигация</h3>
+                            <ul class="nav-categories">
+                                <li class="nav-category active" data-category="all">
+                                    <i class="fas fa-home"></i>
+                                    <span>Главная</span>
+                                    <span class="article-count">152</span>
+                                </li>
+                                <li class="nav-category" data-category="finance">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Финансы</span>
+                                    <span class="article-count">28</span>
+                                </li>
+                                <li class="nav-category" data-category="logistics">
+                                    <i class="fas fa-truck"></i>
+                                    <span>Логистика</span>
+                                    <span class="article-count">35</span>
+                                </li>
+                                <li class="nav-category" data-category="hr">
+                                    <i class="fas fa-users"></i>
+                                    <span>Персонал</span>
+                                    <span class="article-count">42</span>
+                                </li>
+                                <li class="nav-category" data-category="projects">
+                                    <i class="fas fa-project-diagram"></i>
+                                    <span>Проекты</span>
+                                    <span class="article-count">19</span>
+                                </li>
+                                <li class="nav-category" data-category="control">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Контроль</span>
+                                    <span class="article-count">23</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="nav-section">
+                            <h3><i class="fas fa-fire"></i> Популярное</h3>
+                            <ul class="popular-articles">
+                                <li><a href="#" onclick="showArticle('ros-complete-guide')">📊 Рентабельность для начинающих</a></li>
+                                <li><a href="#" onclick="showArticle('kpi-system')">🎯 KPI от А до Я</a></li>
+                                <li><a href="#" onclick="showArticle('inventory-management')">📦 Управление запасами</a></li>
+                                <li><a href="#" onclick="showArticle('team-motivation')">🚀 Мотивация команды</a></li>
+                                <li><a href="#" onclick="showArticle('financial-analysis')">💡 Финансовый анализ</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="nav-section">
+                            <h3><i class="fas fa-graduation-cap"></i> Обучение</h3>
+                            <ul class="learning-paths">
+                                <li><a href="#" onclick="showLearningPath('finance')">💰 Финансовый директор</a></li>
+                                <li><a href="#" onclick="showLearningPath('logistics')">🚚 Директор по логистике</a></li>
+                                <li><a href="#" onclick="showLearningPath('hr')">👥 HR-директор</a></li>
+                                <li><a href="#" onclick="showLearningPath('projects')">📊 Руководитель проектов</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <div class="sidebar-footer">
+                        <div class="wiki-stats">
+                            <div class="stat">
+                                <span class="number">152</span>
+                                <span class="label">Статьи</span>
                             </div>
-                            <div class="article-card" onclick="showArticle('checklist-guide')">
-                                <i class="fas fa-clipboard-check"></i>
-                                <h4>Работа с чек-листами</h4>
-                                <p>Как эффективно использовать контрольные списки</p>
+                            <div class="stat">
+                                <span class="number">45</span>
+                                <span class="label">Шаблоны</span>
                             </div>
-                            <div class="article-card" onclick="showArticle('kpi-guide')">
-                                <i class="fas fa-chart-bar"></i>
-                                <h4>Система KPI</h4>
-                                <p>Настройка и мониторинг ключевых показателей</p>
+                            <div class="stat">
+                                <span class="number">28</span>
+                                <span class="label">Видео</span>
                             </div>
                         </div>
                     </div>
-                </div>
+                </aside>
 
-                <div class="article-content hidden" id="articleContent">
-                    <!-- Сюда будет загружаться контент статей -->
+                <!-- Основная область контента -->
+                <div class="wiki-content">
+                    <!-- Приветственный экран -->
+                    <div class="welcome-screen" id="welcomeScreen">
+                        <div class="welcome-hero">
+                            <h2>Добро пожаловать в Базу Знаний!</h2>
+                            <p>Здесь собрана вся информация для эффективного управления вашим предприятием</p>
+                            
+                            <div class="quick-stats">
+                                <div class="quick-stat">
+                                    <i class="fas fa-calculator"></i>
+                                    <div>
+                                        <span class="number">28</span>
+                                        <span class="label">Финансовых калькуляторов</span>
+                                    </div>
+                                </div>
+                                <div class="quick-stat">
+                                    <i class="fas fa-clipboard-list"></i>
+                                    <div>
+                                        <span class="number">65</span>
+                                        <span class="label">Чек-листов</span>
+                                    </div>
+                                </div>
+                                <div class="quick-stat">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <div>
+                                        <span class="number">42</span>
+                                        <span class="label">KPI-метрик</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Избранные статьи -->
+                        <section class="featured-section">
+                            <h3><i class="fas fa-star"></i> Рекомендуем к изучению</h3>
+                            <div class="articles-grid">
+                                <article class="article-card featured" onclick="showArticle('ros-complete-guide')">
+                                    <div class="article-badge">🔥 Популярное</div>
+                                    <div class="article-icon">
+                                        <i class="fas fa-calculator"></i>
+                                    </div>
+                                    <h4>Полное руководство по рентабельности</h4>
+                                    <p>ROS, ROA, ROE, ROI - все показатели с примерами и калькуляторами</p>
+                                    <div class="article-meta">
+                                        <span class="difficulty beginner">Начальный</span>
+                                        <span class="time"><i class="fas fa-clock"></i> 15 мин</span>
+                                    </div>
+                                </article>
+
+                                <article class="article-card featured" onclick="showArticle('kpi-system')">
+                                    <div class="article-badge">🎯 Обязательно</div>
+                                    <div class="article-icon">
+                                        <i class="fas fa-bullseye"></i>
+                                    </div>
+                                    <h4>Система KPI для всех отделов</h4>
+                                    <p>Как разработать, внедрить и отслеживать ключевые показатели</p>
+                                    <div class="article-meta">
+                                        <span class="difficulty intermediate">Средний</span>
+                                        <span class="time"><i class="fas fa-clock"></i> 25 мин</span>
+                                    </div>
+                                </article>
+
+                                <article class="article-card featured" onclick="showArticle('inventory-management')">
+                                    <div class="article-badge">💸 Экономия</div>
+                                    <div class="article-icon">
+                                        <i class="fas fa-boxes"></i>
+                                    </div>
+                                    <h4>Оптимизация складских запасов</h4>
+                                    <p>Методы снижения затрат на 30% без потери качества обслуживания</p>
+                                    <div class="article-meta">
+                                        <span class="difficulty intermediate">Средний</span>
+                                        <span class="time"><i class="fas fa-clock"></i> 20 мин</span>
+                                    </div>
+                                </article>
+                            </div>
+                        </section>
+
+                        <!-- Категории -->
+                        <section class="categories-section">
+                            <h3><i class="fas fa-folder"></i> Изучайте по категориям</h3>
+                            <div class="categories-grid">
+                                <div class="category-card" data-category="finance">
+                                    <div class="category-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <h4>Финансы</h4>
+                                    <p>28 статей • 15 калькуляторов</p>
+                                    <ul>
+                                        <li>📊 Рентабельность</li>
+                                        <li>💰 Бюджетирование</li>
+                                        <li>📈 Анализ отчетности</li>
+                                    </ul>
+                                </div>
+
+                                <div class="category-card" data-category="logistics">
+                                    <div class="category-icon">
+                                        <i class="fas fa-truck"></i>
+                                    </div>
+                                    <h4>Логистика</h4>
+                                    <p>35 статей • 20 чек-листов</p>
+                                    <ul>
+                                        <li>📦 Управление запасами</li>
+                                        <li>🚛 Транспортная логистика</li>
+                                        <li>📋 Процессы склада</li>
+                                    </ul>
+                                </div>
+
+                                <div class="category-card" data-category="hr">
+                                    <div class="category-icon">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <h4>Персонал</h4>
+                                    <p>42 статьи • 18 методик</p>
+                                    <ul>
+                                        <li>🎯 KPI сотрудников</li>
+                                        <li>🚀 Мотивация</li>
+                                        <li>📚 Обучение</li>
+                                    </ul>
+                                </div>
+
+                                <div class="category-card" data-category="projects">
+                                    <div class="category-icon">
+                                        <i class="fas fa-project-diagram"></i>
+                                    </div>
+                                    <h4>Проекты</h4>
+                                    <p>19 статей • 12 шаблонов</p>
+                                    <ul>
+                                        <li>📅 Управление сроками</li>
+                                        <li>💸 Бюджет проектов</li>
+                                        <li>✅ Методологии</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Контент статьи -->
+                    <div class="article-screen hidden" id="articleScreen">
+                        <article class="article-full" id="articleContent">
+                            <!-- Контент статьи будет загружаться сюда -->
+                        </article>
+                    </div>
+
+                    <!-- Результаты поиска -->
+                    <div class="search-results-screen hidden" id="searchResultsScreen">
+                        <div class="search-results-header">
+                            <h3 id="searchResultsTitle">Результаты поиска</h3>
+                            <button class="btn-back" onclick="showWelcomeScreen()">
+                                <i class="fas fa-arrow-left"></i> Назад
+                            </button>
+                        </div>
+                        <div class="search-results" id="searchResults">
+                            <!-- Результаты поиска будут здесь -->
+                        </div>
+                    </div>
                 </div>
-            </main>
+            </div>
         </div>
-    </div>
+    </main>
+
+    <!-- Футер -->
+    <footer class="wiki-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>База знаний</h4>
+                    <p>Комплексная система управления знаниями для вашего предприятия</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Разделы</h4>
+                    <ul>
+                        <li><a href="#" onclick="showCategory('finance')">Финансы</a></li>
+                        <li><a href="#" onclick="showCategory('logistics')">Логистика</a></li>
+                        <li><a href="#" onclick="showCategory('hr')">Персонал</a></li>
+                        <li><a href="#" onclick="showCategory('projects')">Проекты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Помощь</h4>
+                    <ul>
+                        <li><a href="#" onclick="showArticle('how-to-use-wiki')">Как пользоваться базой</a></li>
+                        <li><a href="#" onclick="showArticle('contribution-guide')">Добавить статью</a></li>
+                        <li><a href="#" onclick="showArticle('feedback')">Обратная связь</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Центр управления предприятием. База знаний v2.0</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="js/wiki.js"></script>
 </body>
