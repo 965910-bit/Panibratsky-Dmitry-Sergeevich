@@ -1,8 +1,23 @@
 User-agent: *
 Allow: /
-
-Карта сайта: https://965910-bit.github.io/Panibratsky-Dmitry-Sergeevich/sitemap.xml
-
-# Directives
 Disallow: /private/
 Disallow: /tmp/
+Disallow: /личное/
+
+Sitemap: https://965910-bit.github.io/Panibratsky-Dmitry-Sergeevich/sitemap.xml
+
+# Директивы для поисковых систем
+# Яндекс.Вебмастер
+User-agent: Yandex
+Allow: /
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /личное/
+Crawl-delay: 1
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /личное/
